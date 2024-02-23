@@ -1,0 +1,8 @@
+.image-banner{
+    margin-top: 5%;
+    display:inline-flex;
+    gap: 100px;
+}
+.image-slider{
+    height: 300px;
+}
