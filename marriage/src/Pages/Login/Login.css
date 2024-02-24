@@ -1,6 +1,40 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap');
+.login-details{
+    width: 40%;
+    border: 1px solid var(--green);
+    border-radius: 4px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    justify-content:center;
+    align-items: center;
+    padding-bottom: 25px;
+    background-color: var(--white);
+    margin: auto;
+    margin-top: 5%;
+}
+.login-details > h3{
+    width: 100%;
+}
+.login-inputs{
+    width: 75%;
+}
+.login-header{
+    color: var(--white);
+    background-color: var(--green);
+}
 
-  * {
-    background-image: linear-gradient(to bottom right, LightGray 50%, Salmon 50%);
-    height: 100vh;
-    margin: 0;
-  }
+.sub-heading{
+    font-family:"Playfair Display", serif;
+    font-size: large;
+    color: grey;
+}
+.main-heading{
+    font-family: Nanum Gothic;
+    font-size: xx-large;
+}
+.header{
+    margin-top: 5%;
+    display: grid;
+    gap: 1.5rem;
+}
