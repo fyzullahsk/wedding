@@ -1,6 +1,7 @@
 import React from "react";
 import "./LandingPage.css";
 import { Link } from "react-router-dom";
+
 import ImageSwiper from "../../Components/ImageSwiper/ImageSwiper";
 export default function LandingPage() {
     return (
@@ -12,12 +13,12 @@ export default function LandingPage() {
                     </Link>
                     <ul className="nav-menu">
                         <li className="nav-item">
-                            <Link to="/" className="nav-links">
+                            <Link to="/register" className="nav-links">
                                 Register
                             </Link>
                         </li>
                         <li className="nav-item">
-                            <Link to="/" className="nav-links">
+                            <Link to="/Login" className="nav-links">
                                 Login
                             </Link>
                         </li>
