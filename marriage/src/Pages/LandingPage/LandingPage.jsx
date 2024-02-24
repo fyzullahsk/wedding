@@ -34,11 +34,11 @@ export default function LandingPage() {
                     <ImageSwiper />
                 </div>
                 <div className="text-content">
-                    <div className="grid-container">
-                        <div className="grid-item">
+                    <div className="message-container">
+                        <div className="message-item">
                             <span className="left-grid-item">WHAT WE BELIEVE</span>
                         </div>
-                        <div className="grid-item">
+                        <div className="message-item">
                             <div className="grid-item-content">
                                 <span >We believe in celebrating love.</span>
                                 <span>Venue.Caterer.Decor.Arrangements.Destination Wedding. Plan ahead.Seamless transaction.Hessle-free celebration.</span>

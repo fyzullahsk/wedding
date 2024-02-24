@@ -57,7 +57,7 @@
     font-family:"Playfair Display", serif;
     font-size: xx-large;
 }
-.grid-container {
+.message-container {
     font-family: Arial, Helvetica, sans-serif;
     margin: 2%;
     display: grid;
@@ -65,7 +65,7 @@
     grid-gap: 10px;
   }
   
-  .grid-item {
+  .message-item {
     padding: 20px;
     text-align: center;
   }

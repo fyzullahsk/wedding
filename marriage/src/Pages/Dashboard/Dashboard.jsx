@@ -1,7 +1,7 @@
 import React from "react";
 import './Dashboard.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faChevronDown } from '@fortawesome/free-solid-svg-icons';
+import { faChevronCircleDown } from '@fortawesome/free-solid-svg-icons';
 import Navbar from "../../Components/Navbar/Navbar";
 export default function Dashboard() {
 
@@ -47,7 +47,8 @@ export default function Dashboard() {
                     </div>
                     <div className="grid-item small">
                         <button className="more-button">
-                            <FontAwesomeIcon className="more-button-icon" icon={faChevronDown} />See More</button>
+                        {/* <FontAwesomeIcon icon={faChevronCircleDown} /> */}
+                            <FontAwesomeIcon className="more-button-icon" icon={faChevronCircleDown} />See More</button>
                     </div>
                 </div>
             </div>
@@ -90,7 +91,7 @@ export default function Dashboard() {
                     </div>
                     <div className="grid-item small">
                         <button className="more-button">
-                            <FontAwesomeIcon className="more-button-icon" icon={faChevronDown} />See More</button>
+                            <FontAwesomeIcon className="more-button-icon" icon={faChevronCircleDown} />See More</button>
                     </div>
                 </div>
             </div>
@@ -133,7 +134,7 @@ export default function Dashboard() {
                     </div>
                     <div className="grid-item small">
                         <button className="more-button">
-                            <FontAwesomeIcon className="more-button-icon" icon={faChevronDown} />See More</button>
+                            <FontAwesomeIcon className="more-button-icon" icon={faChevronCircleDown} />See More</button>
                     </div>
                 </div>
             </div>
