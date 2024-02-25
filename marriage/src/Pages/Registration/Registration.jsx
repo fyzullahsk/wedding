@@ -66,8 +66,8 @@ export default function Registration() {
                     <input type="password" id="confirmPassword" name="confirmPassword" value={values.confirmPassword} onChange={handleChange} autoComplete="off" required />
                 </div>
                 <div className="registration-buttons">
-                    <input type="submit" value="Submit" />
-                    <input type="button" value="Cancel" onClick={handleCancel} />
+                    <input type="submit" value="Submit" id="submit" />
+                    <input type="button" value="Cancel" id="cancel" onClick={handleCancel} />
                 </div>
             </form>
         </>

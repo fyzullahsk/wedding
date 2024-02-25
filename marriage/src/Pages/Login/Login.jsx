@@ -51,7 +51,7 @@ export default function Login() {
                     </div>
                     {errors.errorMessage && <div className="error-message">{errors.errorMessage}</div>}
 
-                    <button onClick={handleOnClick}>Submit</button>
+                    <button onClick={handleOnClick}  id="login">Login</button>
                     <div>
                         Not a member? <Link to={"/register"}>Register</Link>
                     </div>
