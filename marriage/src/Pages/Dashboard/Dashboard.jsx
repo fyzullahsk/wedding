@@ -3,8 +3,13 @@ import './Dashboard.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronCircleDown } from '@fortawesome/free-solid-svg-icons';
 import Navbar from "../../Components/Navbar/Navbar";
-export default function Dashboard() {
+import { useNavigate } from "react-router-dom";
 
+export default function Dashboard() {
+    const navigate = useNavigate();
+    const handleSeeMore=()=>{
+        navigate('/CategoryDetails');
+    }
     return (
         <>
             <Navbar/>
@@ -47,8 +52,7 @@ export default function Dashboard() {
                         </div>
                     </div>
                     <div className="grid-item small">
-                        <button className="more-button">
-                        {/* <FontAwesomeIcon icon={faChevronCircleDown} /> */}
+                        <button className="more-button" onClick={handleSeeMore}>
                             <FontAwesomeIcon className="more-button-icon" icon={faChevronCircleDown} />See More</button>
                     </div>
                 </div>
