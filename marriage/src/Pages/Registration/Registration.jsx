@@ -1,12 +1,38 @@
-import React from "react";
+import React, { useState } from "react";
 import './Registration.css';
 import { useNavigate } from "react-router-dom";
+import axios from 'axios';
 
 export default function Registration() {
     const navigate = useNavigate();
+    const [values, setValues] = useState({
+        firstName: '',
+        lastName: '',
+        email: '',
+        phone: '',
+        password: '',
+        confirmPassword: ''
+    });
+
+    const handleChange = (event) => {
+        setValues({ ...values, [event.target.name]: event.target.value });
+    };
 
     const handleCancel = () => {
         navigate('/');
+    };
+
+    const handleSubmit = async (event) => {
+        event.preventDefault();
+        try {
+            const response = await axios.post('http://localhost:8081/register', values);
+            console.log(response.data); // Handle successful registration response
+            // Redirect to login page or any other desired action
+            navigate('/login');
+        } catch (error) {
+            console.error('Registration error:', error.response.data);
+            // Handle error, display error messages, etc.
+        }
     };
 
     return (
@@ -14,36 +40,36 @@ export default function Registration() {
             <div className="heading">
                 <h1>Registration</h1>
             </div>
-            <div className="form-container">
+            <form className="form-container" onSubmit={handleSubmit}>
                 <div className="item">
                     <label htmlFor="firstName">First Name</label>
-                    <input type="text" id="firstName" name="firstName" autoComplete="off" required />
+                    <input type="text" id="firstName" name="firstName" value={values.firstName} onChange={handleChange} autoComplete="off" required />
                 </div>
                 <div className="item">
                     <label htmlFor="lastName">Last Name</label>
-                    <input type="text" id="lastName" name="lastName" autoComplete="off" required />
+                    <input type="text" id="lastName" name="lastName" value={values.lastName} onChange={handleChange} autoComplete="off" required />
                 </div>
                 <div className="item">
                     <label htmlFor="email">Email</label>
-                    <input type="email" id="email" name="email" autoComplete="off" required />
+                    <input type="email" id="email" name="email" value={values.email} onChange={handleChange} autoComplete="off" required />
                 </div>
                 <div className="item">
                     <label htmlFor="phone">Phone Number</label>
-                    <input type="tel" id="phone" name="phone" autoComplete="off" required />
+                    <input type="tel" id="phone" name="phone" value={values.phone} onChange={handleChange} autoComplete="off" required />
                 </div>
                 <div className="item">
                     <label htmlFor="password">Password</label>
-                    <input type="password" id="password" name="password" autoComplete="off" required />
+                    <input type="password" id="password" name="password" value={values.password} onChange={handleChange} autoComplete="off" required />
                 </div>
                 <div className="item">
                     <label htmlFor="confirmPassword">Confirm Password</label>
-                    <input type="password" id="confirmPassword" name="confirmPassword" autoComplete="off" required />
+                    <input type="password" id="confirmPassword" name="confirmPassword" value={values.confirmPassword} onChange={handleChange} autoComplete="off" required />
                 </div>
-            </div>
-            <div className="registration-buttons">
-                <input type="submit" value="Submit" />
-                <input type="button" value="Cancel" onClick={handleCancel} />
-            </div>
+                <div className="registration-buttons">
+                    <input type="submit" value="Submit" />
+                    <input type="button" value="Cancel" onClick={handleCancel} />
+                </div>
+            </form>
         </>
-    )
+    );
 }
