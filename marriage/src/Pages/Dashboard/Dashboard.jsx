@@ -8,6 +8,7 @@ export default function Dashboard() {
     return (
         <>
             <Navbar/>
+            <div className="dashboard-outer-container">
             <div className="Dashboard-content">
                 <div className="category">
                     <div className="category-name">
@@ -137,6 +138,7 @@ export default function Dashboard() {
                             <FontAwesomeIcon className="more-button-icon" icon={faChevronCircleDown} />See More</button>
                     </div>
                 </div>
+            </div>
             </div>
         </>
     )
