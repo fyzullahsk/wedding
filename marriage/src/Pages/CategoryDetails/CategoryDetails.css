@@ -1,0 +1,9 @@
+.custom-grid-container{
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+}
+.custom-grid-item{
+    background-color: #f0f0f0;
+    text-align: center;
+}

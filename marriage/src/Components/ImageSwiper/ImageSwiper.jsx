@@ -6,19 +6,16 @@ import "./ImageSwiper.css";
 class ImageSwiper extends Component {
   render() {
       return (
-        <div className="image-slider">
-          <Carousel>
-              <div>
-              <img src="assets/wedding-image1.jpg" alt="" />
-                  <p className="legend">Legend 1</p>
+        <div className="slider-container">
+          <Carousel className="carousel-style" autoPlay="true" infiniteLoop="true" interval="2000" showArrows={true} showThumbs={false} showStatus={false}>
+              <div className="slider-item-div">
+              <img className="carousel-image" src="assets/wedding-image1.jpg" alt="" />
               </div>
-              <div>
-              <img src="assets/wedding-image2.jpg" alt="" />
-                  <p className="legend">Legend 2</p>
+              <div className="slider-item-div">
+              <img className="carousel-image" src="assets/wedding-image2.jpg" alt="" />
               </div>
-              <div>
-              <img src="assets/wedding-image3.jpg" alt="" />
-                  <p className="legend">Legend 3</p>
+              <div className="slider-item-div">
+              <img className="carousel-image" src="assets/wedding-image3.jpg" alt="" />
               </div>
           </Carousel>
           </div>
