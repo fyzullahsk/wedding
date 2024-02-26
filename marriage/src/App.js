@@ -10,6 +10,7 @@ import AdminDashboard from "./Admin/AdminDashboard/AdminDashboard";
 import Venue from "./Admin/Venue/Venue";
 import Decors from "./Admin/Decors/Decors";
 import Caterers from "./Admin/Caterers/Caterers";
+
 function App() {
   return (
     <div className="App">
@@ -25,6 +26,7 @@ function App() {
           <Route path="/managevenues" element={<Venue/>}/>
           <Route path="/managedecors" element={<Decors/>}/>
           <Route path="/managecaterers" element={<Caterers/>}/>
+       
         </Routes>
       </BrowserRouter>
     </div>
