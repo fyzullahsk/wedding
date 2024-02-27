@@ -10,6 +10,12 @@ import AdminDashboard from "./Admin/AdminDashboard/AdminDashboard";
 import Venue from "./Admin/Venue/Venue";
 import Decors from "./Admin/Decors/Decors";
 import Caterers from "./Admin/Caterers/Caterers";
+import AddVenue from "./Admin/Venue/AddVenue";
+import UpdateVenue from "./Admin/Venue/UpdateVenue";
+import AddCaterers from "./Admin/Caterers/AddCaterers";
+import UpdateCaterers from "./Admin/Caterers/UpdateCaterers";
+import AddDecorer from "./Admin/Decors/AddDecorer";
+import UpdateDecorer from "./Admin/Decors/UpdateDecorer";
 function App() {
   return (
     <div className="App">
@@ -25,6 +31,12 @@ function App() {
           <Route path="/managevenues" element={<Venue/>}/>
           <Route path="/managedecors" element={<Decors/>}/>
           <Route path="/managecaterers" element={<Caterers/>}/>
+          <Route path="/AddVenue" element={<AddVenue/>}/>
+          <Route path="/UpdateVenue" element={<UpdateVenue/>}/>
+          <Route path="/AddCaterers" element={<AddCaterers/>}/>
+          <Route path="/UpdateCaterers" element={<UpdateCaterers/>}/>
+          <Route path="/AddDecorer" element={<AddDecorer/>}/>
+          <Route path="/UpdateDecorer" element={<UpdateDecorer/>}/>
         </Routes>
       </BrowserRouter>
     </div>
