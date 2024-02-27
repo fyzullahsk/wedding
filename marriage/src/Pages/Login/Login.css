@@ -25,7 +25,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    color: var(--white); /* Changed text color to white for better contrast */
+    color: black; /* Changed text color to white for better contrast */
     font-size: 36px; /* Increased font size for better readability */
     text-align: center; /* Center-align text */
 }

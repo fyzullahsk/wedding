@@ -75,6 +75,58 @@ app.post('/register', (req, res) => {
 });
 
 
+app.get('/getvenue',(req,res)=>{
+    const sql="SELECT * FROM venue";
+    con.query(sql,(err,result)=>{
+        if(err) return res.json({Error:"Got an error in the sql"});
+        return res.json({Status:"Success",Result:result})
+    })
+})
+
+app.delete('/deletevenue/:id',(req,res)=>{
+    const id = req.params.id;
+    const sql='DELETE FROM venue WHERE id = ?';
+    con.query(sql, [id], (err, result) => {
+        if(err) return res.json({Error: "delete venue error in sql"});
+        return res.json({Status: "Success"})
+    })
+})
+
+app.get('/getdecor',(req,res)=>{
+    const sql="SELECT * FROM decor";
+    con.query(sql,(err,result)=>{
+        if(err) return res.json({Error:"Got an error in the sql"});
+        return res.json({Status:"Success",Result:result})
+    })
+})
+
+app.delete('/deletedecor/:id',(req,res)=>{
+    const id = req.params.id;
+    const sql='DELETE FROM decor WHERE id = ?';
+    con.query(sql, [id], (err, result) => {
+        if(err) return res.json({Error: "delete decor error in sql"});
+        return res.json({Status: "Success"})
+    })
+})
+
+
+app.get('/getcaterer',(req,res)=>{
+    const sql="SELECT * FROM caterer";
+    con.query(sql,(err,result)=>{
+        if(err) return res.json({Error:"Got an error in the sql"});
+        return res.json({Status:"Success",Result:result})
+    })
+})
+
+app.delete('/deletecaterer/:id',(req,res)=>{
+    const id = req.params.id;
+    const sql='DELETE FROM caterer WHERE id = ?';
+    con.query(sql, [id], (err, result) => {
+        if(err) return res.json({Error: "delete caterer error in sql"});
+        return res.json({Status: "Success"})
+    })
+})
+
 app.listen(8081, () => {
     console.log("Running");
 });

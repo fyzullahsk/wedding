@@ -17,7 +17,7 @@ export default function AdminNavbar() {
                     </li>
                     <li className="nav-item">
                         <Link to="/managedecors" className="nav-links">
-                            Decors
+                            Decorers
                         </Link>
                     </li>
                     <li className="nav-item">
