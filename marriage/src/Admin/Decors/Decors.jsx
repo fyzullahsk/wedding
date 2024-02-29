@@ -59,7 +59,7 @@ function Decors() {
                   <p>decor price : {val.price}</p>
                 </div>
                 <div className="buttonContainer">
-                  <Link to={`/admin/editdecor/${val.id}`} id="adminEditDecor" className="editButton" type="button">
+                  <Link to={`/UpdateDecorer/${val.id}`} id="adminEditDecor" className="editButton" type="button">
                     <FaEdit />
                   </Link>
                   <Link onClick={e => handleDelete(val.id)} id="adminDelete" className="deleteButton" type="button">

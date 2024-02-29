@@ -59,7 +59,7 @@ function Venue() {
                   <p>venue price : {val.price}</p>
                 </div>
                 <div className="buttonContainer">
-                  <Link to={`/admin/editvenue/${val.id}`} id="adminEditVenue" className="editButton" type="button">
+                  <Link to={`/UpdateVenue/${val.id}`} id="adminEditVenue" className="editButton" type="button">
                     <FaEdit />
                   </Link>
                   <Link onClick={e => handleDelete(val.id)} id="adminDelete" className="deleteButton" type="button">

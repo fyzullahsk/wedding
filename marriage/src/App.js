@@ -32,11 +32,11 @@ function App() {
           <Route path="/managedecors" element={<Decors/>}/>
           <Route path="/managecaterers" element={<Caterers/>}/>
           <Route path="/AddVenue" element={<AddVenue/>}/>
-          <Route path="/UpdateVenue" element={<UpdateVenue/>}/>
+          <Route path="/UpdateVenue/:id" element={<UpdateVenue/>}/>
           <Route path="/AddCaterers" element={<AddCaterers/>}/>
-          <Route path="/UpdateCaterers" element={<UpdateCaterers/>}/>
+          <Route path="/UpdateCaterer/:id" element={<UpdateCaterers/>}/>
           <Route path="/AddDecorer" element={<AddDecorer/>}/>
-          <Route path="/UpdateDecorer" element={<UpdateDecorer/>}/>
+          <Route path="/UpdateDecorer/:id" element={<UpdateDecorer/>}/>
         </Routes>
       </BrowserRouter>
     </div>
