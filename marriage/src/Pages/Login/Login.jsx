@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import "./Login.css";
 import { Link, useNavigate } from "react-router-dom";
 import axios from 'axios';
+import LandingNav from '../LandingPage/LandingNav';
 
 export default function Login() {
     const navigate = useNavigate();
@@ -28,7 +29,8 @@ export default function Login() {
 
     return (
         <>
-            <div className="d-flex justify-content-center">
+        <LandingNav/>
+            <div className="login-main d-flex justify-content-center">
                 <div className="header">
                     <div>
                         <h1 className='main-heading'>Welcome to your Wedding Portal</h1>

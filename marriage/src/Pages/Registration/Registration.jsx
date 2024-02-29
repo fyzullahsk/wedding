@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import './Registration.css';
 import { useNavigate } from "react-router-dom";
 import axios from 'axios';
+import LandingNav from "../LandingPage/LandingNav";
 
 export default function Registration() {
     const navigate = useNavigate();
@@ -37,6 +38,8 @@ export default function Registration() {
 
     return (
         <>
+        {/* Nav bar common for register and login */}
+            <LandingNav/>
             <div className="heading">
                 <h1>Registration</h1>
             </div>
@@ -65,10 +68,8 @@ export default function Registration() {
                     <label htmlFor="confirmPassword">Confirm Password</label>
                     <input type="password" id="confirmPassword" name="confirmPassword" value={values.confirmPassword} onChange={handleChange} autoComplete="off" required />
                 </div>
-                <div className="registration-buttons">
                     <input type="submit" value="Submit" id="submit" />
                     <input type="button" value="Cancel" id="cancel" onClick={handleCancel} />
-                </div>
             </form>
         </>
     );

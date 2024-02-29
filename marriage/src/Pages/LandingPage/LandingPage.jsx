@@ -1,30 +1,13 @@
 import React from "react";
 import "./LandingPage.css";
-import { Link } from "react-router-dom";
 
 import ImageSwiper from "../../Components/ImageSwiper/ImageSwiper";
+import LandingNav from "./LandingNav";
 export default function LandingPage() {
     return (
         <>
-            <nav className="navbar">
-                <div className="navbar-container">
-                    <Link to="/" className="navbar-logo">
-                        ForeverTie
-                    </Link>
-                    <ul className="nav-menu">
-                        <li className="nav-item">
-                            <Link to="/register" className="nav-links">
-                                Register
-                            </Link>
-                        </li>
-                        <li className="nav-item">
-                            <Link to="/Login" className="nav-links">
-                                Login
-                            </Link>
-                        </li>
-                    </ul>
-                </div>
-            </nav>
+            <LandingNav/>
+
             <div className="landing-content">
                 <span className="title">
                     <span className='Welcome-greet'>Welcome to </span>
@@ -35,10 +18,10 @@ export default function LandingPage() {
                 </div>
                 <div className="text-content">
                     <div className="message-container">
-                        <div className="message-item">
+                        <div className="message-item1">
                             <span className="left-grid-item">WHAT WE BELIEVE</span>
                         </div>
-                        <div className="message-item">
+                        <div className="message-item2">
                             <div className="grid-item-content">
                                 <span >We believe in celebrating love.</span>
                                 <span>Venue.Caterer.Decor.Arrangements.Destination Wedding. Plan ahead.Seamless transaction.Hessle-free celebration.</span>

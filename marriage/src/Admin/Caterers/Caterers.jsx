@@ -12,5 +12,3 @@ export default function Caterers(){
         </>
     );
 }
-
-export default Caterers;

@@ -1,8 +1,12 @@
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap');
 .navbar {
     background-color: #fceaf8;
+    z-index: 10;
     height: 100px;
     display: flex;
+    position: fixed;
+    width: 100%;
+    top: 0px;
     justify-content: center;
     align-items: center;
     color: #df45bd;
@@ -42,9 +46,13 @@
     color: #df45bd;
     font-weight: 500;
 }
+.image-carousel{
+    width: 80%;
+    margin: auto;
+}
 
 .landing-content {
-    margin-top: 5%;
+    margin-top: 150px;
 }
 .title{
     display: grid;
@@ -59,14 +67,17 @@
 }
 .message-container {
     font-family: Arial, Helvetica, sans-serif;
-    margin: 2%;
-    display: grid;
-    grid-template-columns: 500px 1fr;
-    grid-gap: 10px;
+    display: flex;
+    padding: 50px 140px;
+    gap: 30px;
   }
   
-  .message-item {
-    padding: 20px;
+  .message-item1 {
+    width: 20%;
+    text-align: center;
+  }
+  .message-item2 {
+    width: 80%;
     text-align: center;
   }
   .grid-item-content{

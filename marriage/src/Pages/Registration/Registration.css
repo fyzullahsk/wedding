@@ -4,19 +4,13 @@
     font-family: Arial, Helvetica, sans-serif;
 }
 
-.heading {
-    height: 200px; /* Increased height for more impact */
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center; /* Center the background image */
-    background-image: url("../../../public/assets/Registration-background.jpeg");
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: black; /* Changed text color to white for better contrast */
-    font-size: 24px; /* Increased font size for better readability */
-    text-align: center; /* Center-align text */
-    margin-bottom: 5%;
+.heading{
+    margin-top: 150px;
+}
+
+.heading > h1{
+    color: #df45bd;
+    font-family:cursive;
 }
 
 .form-container {
@@ -30,7 +24,6 @@
 
 .item {
     gap: 10px;
-    display: grid;
 }
 
 input[type="text"],
@@ -66,16 +59,11 @@ input[type="button"]:hover {
     background-color: #eb54ac; /* Darker pink on hover */
 }
 .registration-buttons {
-    margin: auto; /* Center-align buttons */
-    margin-top: 40px; /* Increased top margin for better spacing */
     display: flex;
-    margin-left: 10%;
-    justify-content: space-between; /* Space evenly between buttons */
-    max-width: 300px; /* Limit width to prevent overflow */
+    gap: 20px;
 }
-#submit{
-    margin-left: 150%;
-}
-#cancel{
-    margin-left: 30%;
+
+#submit , #cancel {
+    margin: auto;
+    width: 50%;
 }
