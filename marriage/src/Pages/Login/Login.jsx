@@ -31,7 +31,7 @@ export default function Login() {
         <>
         <LandingNav/>
             <div className="login-main d-flex justify-content-center">
-                <div className="header">
+                <div className="header"><br></br>
                     <div>
                         <h1 className='main-heading'>Welcome to your Wedding Portal</h1>
                     </div>

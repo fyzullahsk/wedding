@@ -68,8 +68,8 @@ export default function Registration() {
                     <label htmlFor="confirmPassword">Confirm Password</label>
                     <input type="password" id="confirmPassword" name="confirmPassword" value={values.confirmPassword} onChange={handleChange} autoComplete="off" required />
                 </div>
-                    <input type="submit" value="Submit" id="submit" />
-                    <input type="button" value="Cancel" id="cancel" onClick={handleCancel} />
+                    <input type="submit" value="Submit" id="login" />
+                    <input type="button" value="Cancel" id="login" onClick={handleCancel} />
             </form>
         </>
     );

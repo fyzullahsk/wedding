@@ -14,9 +14,9 @@
     justify-content: center;
     align-items: center;
     color: black; /* Changed text color to white for better contrast */
-    font-size: 24px; /* Increased font size for better readability */
+    font-size: 10px; /* Increased font size for better readability */
     text-align: center; /* Center-align text */
-    margin-bottom: 5%;
+    margin-top:5%;
 }
 
 .form-container {
@@ -51,19 +51,30 @@ input[type="password"] {
     font-size: 16px; /* Increased font size for better readability */
 }
 
+/* Buttons */
 input[type="submit"],
 input[type="button"] {
     background-color: #f657a7;
     color: white;
-    padding: 14px 24px; /* Increased padding for better touch interaction */
+    padding: 10px 20px; /* Decreased padding for smaller size */
     border: none;
-    border-radius: 20px; /* Increased border radius for a softer look */
+    border-radius: 10px; /* Decreased border radius for a smaller look */
     cursor: pointer;
-    width: 60%; /* Adjusted width for better proportion */
-    font-size: 18px; /* Increased font size for better readability */
-    text-transform: uppercase; /* Converted text to uppercase */
-    transition: background-color 0.3s ease; /* Added transition for smoother hover effect */
+    width: auto; /* Let the width be determined by content */
+    font-size: 14px; /* Decreased font size for smaller text */
+    text-transform: uppercase;
+    transition: background-color 0.3s ease;
 }
+
+/* Centering buttons */
+.registration-buttons {
+    margin: auto;
+    margin-top: 40px;
+    display: flex;
+    justify-content: center; /* Center buttons horizontally */
+    max-width: 300px;
+}
+
 
 input[type="submit"]:hover,
 input[type="button"]:hover {
@@ -84,5 +95,5 @@ input[type="button"]:hover {
 }
 
 #cancel {
-    margin-left: 30%;
+    margin-left: 0%;
 }
