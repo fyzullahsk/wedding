@@ -1,16 +1,22 @@
+/* Fonts */
 * {
     margin: 0;
     box-sizing: border-box;
     font-family: Arial, Helvetica, sans-serif;
 }
 
-.heading{
-    margin-top: 150px;
-}
-
-.heading > h1{
-    color: #df45bd;
-    font-family:cursive;
+.heading {
+    height: 200px; /* Increased height for more impact */
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center; /* Center the background image */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: black; /* Changed text color to white for better contrast */
+    font-size: 24px; /* Increased font size for better readability */
+    text-align: center; /* Center-align text */
+    margin-bottom: 5%;
 }
 
 .form-container {
@@ -20,10 +26,15 @@
     grid-template-columns: repeat(2, 1fr);
     grid-template-rows: repeat(3, 1fr);
     gap: 20px; /* Increased gap for better spacing */
+    background: linear-gradient(45deg,#5c4db1, #ff69b4); /* Gradient background with mixed colors */
+    border-radius: 20px; /* Rounded corners */
+    padding: 20px; /* Added padding for better spacing */
 }
 
 .item {
     gap: 10px;
+    display: grid;
+    color:white;
 }
 
 input[type="text"],
@@ -42,7 +53,7 @@ input[type="password"] {
 
 input[type="submit"],
 input[type="button"] {
-    background-color: #ca08a0;
+    background-color: #f657a7;
     color: white;
     padding: 14px 24px; /* Increased padding for better touch interaction */
     border: none;
@@ -56,14 +67,22 @@ input[type="button"] {
 
 input[type="submit"]:hover,
 input[type="button"]:hover {
-    background-color: #eb54ac; /* Darker pink on hover */
-}
-.registration-buttons {
-    display: flex;
-    gap: 20px;
+    background-color: #ff1493; /* Darker pink on hover */
 }
 
-#submit , #cancel {
-    margin: auto;
-    width: 50%;
+.registration-buttons {
+    margin: auto; /* Center-align buttons */
+    margin-top: 40px; /* Increased top margin for better spacing */
+    display: flex;
+    margin-left: 10%;
+    justify-content: space-between; /* Space evenly between buttons */
+    max-width: 300px; /* Limit width to prevent overflow */
+}
+
+#submit {
+    margin-left: 150%;
+}
+
+#cancel {
+    margin-left: 30%;
 }
