@@ -21,17 +21,16 @@ const UpdateVenue = () => {
 
     // Fetch venue data from the server based on the ID
     useEffect(() => {
-        const fetchVenueData = async () => {
-            try {
-                const response = await axios.get(`http://localhost:8081/getvenue/${id}`);
-                const { img1, img2, img3, img4, name, address, capacity, price } = response.data;
-                setVenueData({ img1, img2, img3, img4, name, address, capacity, price });
-            } catch (error) {
-                console.error("Error fetching venue data:", error);
-            }
-        };
-        fetchVenueData();
+        axios.get(`http://localhost:8081/getvenue/`+id)
+          .then(response => {
+            const { img1, img2, img3, img4, name, address, capacity, price } = response.data;
+            setVenueData({ img1, img2, img3, img4, name, address, capacity, price });
+          })
+          .catch(error => {
+            console.error("Error fetching venue data:", error);
+          });
     }, [id]);
+    
 
     const handleChange = (event) => {
         setVenueData({ ...venueData, [event.target.name]: event.target.value });
@@ -110,50 +109,19 @@ const UpdateVenue = () => {
                     <div className="category-crud-input-images-section">
                         <div className="category-crud-input-images-title">Upload Image Urls</div>
                         <div className="category-crud-input-images">
-                            <div className="category-crud-input">
-                                <label>Image #1</label>
-                                <input
-                                    type="text"
-                                    name="img1"
-                                    placeholder="Enter Image #1 URL"
-                                    value={venueData.img1}
-                                    onChange={handleChange}
-                                    required
-                                />
-                            </div>
-                            <div className="category-crud-input">
-                                <label>Image #2</label>
-                                <input
-                                    type="text"
-                                    name="img2"
-                                    placeholder="Enter Image #2 URL"
-                                    value={venueData.img2}
-                                    onChange={handleChange}
-                                    required
-                                />
-                            </div>
-                            <div className="category-crud-input">
-                                <label>Image #3</label>
-                                <input
-                                    type="text"
-                                    name="img3"
-                                    placeholder="Enter Image #3 URL"
-                                    value={venueData.img3}
-                                    onChange={handleChange}
-                                    required
-                                />
-                            </div>
-                            <div className="category-crud-input">
-                                <label>Image #4</label>
-                                <input
-                                    type="text"
-                                    name="img4"
-                                    placeholder="Enter Image #4 URL"
-                                    value={venueData.img4}
-                                    onChange={handleChange}
-                                    required
-                                />
-                            </div>
+                            {[1, 2, 3, 4].map((index) => (
+                                <div className="category-crud-input" key={index}>
+                                    <label>Image #{index}</label>
+                                    <input
+                                        type="text"
+                                        name={`img${index}`}
+                                        placeholder={`Enter Image #${index} URL`}
+                                        value={venueData[`img${index}`]}
+                                        onChange={handleChange}
+                                        required
+                                    />
+                                </div>
+                            ))}
                         </div>
                     </div>
                     <div className="category-crud-buttons">

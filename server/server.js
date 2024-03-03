@@ -15,7 +15,7 @@ app.use(bodyParser.json());
 const con = mysql.createConnection({
     host: "localhost",
     user: "root",
-    password: "",
+    password: "Mysql@123",
     database: "marriage",
 });
 
@@ -82,6 +82,19 @@ app.get('/getvenue',(req,res)=>{
         return res.json({Status:"Success",Result:result})
     })
 })
+app.get('/getvenue/:id', (req, res) => {
+    const id = req.params.id;
+    const sql = 'SELECT * FROM venue WHERE id = ?';
+    con.query(sql, [id], (err, result) => {
+      if (err) {
+        return res.json({ Error: "Error in SQL" });
+      }
+      if (result.length === 0) {
+        return res.json({ Error: "Not found" });
+      }
+      return res.json({ Status: "Success", Result: result });
+    });
+  });
 
 app.delete('/deletevenue/:id',(req,res)=>{
     const id = req.params.id;

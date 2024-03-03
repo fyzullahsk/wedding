@@ -49,12 +49,12 @@ function Caterers() {
             return (
               <div className="template" key={val.id} id="adminCatererGrid">
                 <div className="Container">
-                  <p>caterer name  : {val.name}</p>
-                  <p>Speciality : {val.speciality}</p>
                   <img src={val.img1} alt="" />
                   <img src={val.img2} alt="" />
                   <img src={val.img3} alt="" />
                   <img src={val.img4} alt="" />
+                  <p>caterer name  : {val.name}</p>
+                  <p>Speciality : {val.speciality}</p>
                   <p>caterer address : {val.address} </p>
                   <p>caterer price : {val.price}</p>
                 </div>

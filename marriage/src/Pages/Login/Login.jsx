@@ -20,12 +20,18 @@ export default function Login() {
         try {
             const response = await axios.post('http://localhost:8081/login', values);
             console.log(response.data); // Handle successful login response
-            navigate('/dashboard');
+            if (values.Username === 'admin' && values.Password === 'admin') {
+                navigate('/AdminDashboard');
+            } else {
+                navigate('/dashboard');
+            }
         } catch (error) {
             console.error('Login error:', error.response.data);
+            alert("Invalid Credentials");
             setError(error.response.data);
         }
     };
+
 
     return (
         <>

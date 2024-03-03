@@ -49,12 +49,12 @@ function Venue() {
             return (
               <div className="template" key={val.id} id="adminVenueGrid">
                 <div className="Container">
-                  <p>venue name  : {val.name}</p>
-                  <p>venue capacity : {val.capacity}</p>
                   <img src={val.img1} alt="" />
                   <img src={val.img2} alt="" />
                   <img src={val.img3} alt="" />
                   <img src={val.img4} alt="" />
+                  <p>venue name  : {val.name}</p>
+                  <p>venue capacity : {val.capacity}</p>
                   <p>venue address : {val.address} </p>
                   <p>venue price : {val.price}</p>
                 </div>

@@ -49,12 +49,12 @@ function Decors() {
             return (
               <div className="template" key={val.id} id="adminDecorGrid">
                 <div className="Container">
-                  <p>decor name  : {val.name}</p>
-                  <p>decor theme : {val.theme}</p>
                   <img src={val.img1} alt="" />
                   <img src={val.img2} alt="" />
                   <img src={val.img3} alt="" />
                   <img src={val.img4} alt="" />
+                  <p>decor name  : {val.name}</p>
+                  <p>decor theme : {val.theme}</p>
                   <p>decor address : {val.address} </p>
                   <p>decor price : {val.price}</p>
                 </div>
