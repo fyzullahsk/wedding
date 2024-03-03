@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import './Caterers.css';
-import { Link, useNavigate, Outlet } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { FaEdit, FaTrash } from 'react-icons/fa';
 import AdminNavbar from "../AdminNavbar/AdminNavbar";
@@ -36,6 +36,10 @@ function Caterers() {
       .catch(err => console.log(err));
   };
 
+  const handleAddCaterer = () => {
+    navigate("/AddCaterers");
+  };
+
   return (
     <>
     <AdminNavbar/>
@@ -53,10 +57,10 @@ function Caterers() {
                   <img src={val.img2} alt="" />
                   <img src={val.img3} alt="" />
                   <img src={val.img4} alt="" />
-                  <p>caterer name  : {val.name}</p>
-                  <p>Speciality : {val.speciality}</p>
-                  <p>caterer address : {val.address} </p>
-                  <p>caterer price : {val.price}</p>
+                  <p><b>Caterer Name:  </b>   {val.name}</p>
+                  <p><b>Speciality </b>  {val.speciality}</p>
+                  <p><b>Address</b>  {val.address} </p>
+                  <p><b>Price :</b>  {val.price}</p>
                 </div>
                 <div className="buttonContainer">
                   <Link to={`/UpdateCaterer/${val.id}`} id="adminEditCaterer" className="editButton" type="button">
@@ -73,6 +77,7 @@ function Caterers() {
           <p>No results found.</p>
         )}
       </div>
+      <button onClick={handleAddCaterer} className="addButton">Add Caterer</button>
     </>
   );
 }

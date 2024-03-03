@@ -84,4 +84,17 @@
 {
   background-color: rgb(255, 0, 140);
 }
+.addButton {
+  background-color: #ff008c; /* Pink color */
+  color: white; /* White text color */
+  border: none; /* Remove border */
+  border-radius: 5px; /* Rounded corners */
+  padding: 10px 20px; /* Padding */
+  font-size: 16px; /* Font size */
+  cursor: pointer; /* Cursor on hover */
+  transition: background-color 0.3s, color 0.3s; /* Smooth transition */
+}
 
+.addButton:hover {
+  background-color: #e6007a; /* Darker pink color on hover */
+}

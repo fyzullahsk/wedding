@@ -35,6 +35,9 @@ function Decors() {
       })
       .catch(err => console.log(err));
   };
+  const handleAddDecorer = () => {
+    navigate("/AddDecorer");
+  };
 
   return (
     <>
@@ -53,10 +56,10 @@ function Decors() {
                   <img src={val.img2} alt="" />
                   <img src={val.img3} alt="" />
                   <img src={val.img4} alt="" />
-                  <p>decor name  : {val.name}</p>
-                  <p>decor theme : {val.theme}</p>
-                  <p>decor address : {val.address} </p>
-                  <p>decor price : {val.price}</p>
+                  <p><b>Decor Name:  </b>   {val.name}</p>
+                  <p><b>Decor Theme  </b>  {val.theme}</p>
+                  <p><b>Address</b>  {val.address} </p>
+                  <p><b>Price :</b>  {val.price}</p>
                 </div>
                 <div className="buttonContainer">
                   <Link to={`/UpdateDecorer/${val.id}`} id="adminEditDecor" className="editButton" type="button">
@@ -73,6 +76,7 @@ function Decors() {
           <p>No results found.</p>
         )}
       </div>
+      <button onClick={handleAddDecorer}  className="addButton">Add Decorer</button>
     </>
   );
 }
