@@ -12,22 +12,22 @@ export default function Navbar(){
                     </Link>
                     <ul className="nav-menu">
                         <li className="nav-item">
-                            <Link to="/" className="nav-links">
+                            <Link to="/venue" className="nav-links">
                                 Venue
                             </Link>
                         </li>
                         <li className="nav-item">
-                            <Link to="/" className="nav-links">
+                            <Link to="/decorer" className="nav-links">
                                 Decor
                             </Link>
                         </li>
                         <li className="nav-item">
-                            <Link to="/" className="nav-links">
+                            <Link to="/caterer" className="nav-links">
                                 Caterer
                             </Link>
                         </li>
                         <li className="nav-item">
-                            <Link to="/" className="nav-links">
+                            <Link to="/cart" className="nav-links">
                             Cart
                             </Link>
                         </li>

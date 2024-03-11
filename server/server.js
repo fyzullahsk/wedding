@@ -15,7 +15,7 @@ app.use(bodyParser.json());
 const con = mysql.createConnection({
     host: "localhost",
     user: "root",
-    password: "Mysql@123",
+    password: "", //Mysql@123
     database: "marriage",
 });
 
@@ -282,6 +282,39 @@ app.put('/updatecaterer/:id', (req, res) => {
         res.json({ message: "Venue updated successfully", venueId });
     });
 });
+
+
+app.post('/addtocart', (req, res) => {
+    const { name, address, price } = req.body;
+
+    // Validate request body
+    if (!name || !address || !price) {
+        return res.status(400).json({ error: "All fields are required" });
+    }
+
+    // Insert into cart table
+    con.query('INSERT INTO cart (name, address, price) VALUES (?, ?, ?)',
+        [name, address, price],
+        (err, result) => {
+            if (err) {
+                console.log("Error in adding to cart:", err);
+                return res.status(500).json({ error: "Internal Server Error" });
+            }
+
+            // Respond with success message
+            res.json({ status: "Success", message: "Success" });
+        }
+    );
+});
+
+app.get('/getbookings',(req,res)=>{
+    const sql="SELECT * FROM cart";
+    con.query(sql,(err,result)=>{
+        if(err) return res.json({Error:"Got an error in the sql"});
+        return res.json({Status:"Success",Result:result})
+    })
+})
+
 
 app.listen(8081, () => {
     console.log("Running");

@@ -5,7 +5,7 @@ import axios from 'axios';
 import { FaEdit, FaTrash } from 'react-icons/fa';
 import AdminNavbar from "../AdminNavbar/AdminNavbar";
 
-function Caterers() {
+function ACaterers() {
   const [data, setData] = useState([]);
   const navigate = useNavigate();
 
@@ -82,4 +82,4 @@ function Caterers() {
   );
 }
 
-export default Caterers;
+export default ACaterers;

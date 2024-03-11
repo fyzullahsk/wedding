@@ -9,13 +9,17 @@ import Feedback from "./Pages/Feedback/Feedback";
 import AdminDashboard from "./Admin/AdminDashboard/AdminDashboard";
 import Venue from "./Admin/Venue/Venue";
 import Decors from "./Admin/Decors/Decors";
-import Caterers from "./Admin/Caterers/Caterers";
+import ACaterers from "./Admin/Caterers/ACaterers";
 import AddVenue from "./Admin/Venue/AddVenue";
 import UpdateVenue from "./Admin/Venue/UpdateVenue";
 import AddCaterers from "./Admin/Caterers/AddCaterers";
 import UpdateCaterers from "./Admin/Caterers/UpdateCaterers";
 import AddDecorer from "./Admin/Decors/AddDecorer";
 import UpdateDecorer from "./Admin/Decors/UpdateDecorer";
+import Venues from "./Pages/Venue/Venues";
+import Decorers from "./Pages/Decorers/Decorers";
+import Caterers from "./Pages/Caterers/Caterers";
+import Bookings from "./Pages/Bookings/Bookings";
 function App() {
   return (
     <div className="App">
@@ -30,13 +34,17 @@ function App() {
           <Route path="/AdminDashboard" element={<AdminDashboard/>}/>
           <Route path="/managevenues" element={<Venue/>}/>
           <Route path="/managedecors" element={<Decors/>}/>
-          <Route path="/managecaterers" element={<Caterers/>}/>
+          <Route path="/managecaterers" element={<ACaterers/>}/>
           <Route path="/AddVenue" element={<AddVenue/>}/>
           <Route path="/UpdateVenue/:id" element={<UpdateVenue/>}/>
           <Route path="/AddCaterers" element={<AddCaterers/>}/>
           <Route path="/UpdateCaterer/:id" element={<UpdateCaterers/>}/>
           <Route path="/AddDecorer" element={<AddDecorer/>}/>
           <Route path="/UpdateDecorer/:id" element={<UpdateDecorer/>}/>
+          <Route path="/Venue" element={<Venues/>}/>
+          <Route path="/decorer" element={<Decorers/>}/>
+          <Route path="/caterer" element={<Caterers/>}/>
+          <Route path="/cart" element={<Bookings/>}/>
         </Routes>
       </BrowserRouter>
     </div>
