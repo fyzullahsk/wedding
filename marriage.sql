@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 27, 2024 at 04:06 AM
+-- Generation Time: Mar 11, 2024 at 05:22 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -20,6 +20,27 @@ SET time_zone = "+00:00";
 --
 -- Database: `marriage`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `cart`
+--
+
+CREATE TABLE `cart` (
+  `id` int(11) NOT NULL,
+  `name` text NOT NULL,
+  `address` text NOT NULL,
+  `price` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `cart`
+--
+
+INSERT INTO `cart` (`id`, `name`, `address`, `price`) VALUES
+(14, 'decor1', 'ap', 'knans'),
+(15, 'Caterer1', 'ap', 'jbsj');
 
 -- --------------------------------------------------------
 
@@ -44,8 +65,8 @@ CREATE TABLE `caterer` (
 --
 
 INSERT INTO `caterer` (`id`, `img1`, `img2`, `img3`, `img4`, `name`, `address`, `speciality`, `price`) VALUES
-(1, 'https://telugu.newsmeter.in/h-upload/2023/02/14/339241-ycp-to-run-jagan-anna-is-our-future-campaign-in-run-up-to-2024-polls.webp', 'https://telugu.newsmeter.in/h-upload/2023/02/14/339241-ycp-to-run-jagan-anna-is-our-future-campaign-in-run-up-to-2024-polls.webp', 'https://telugu.newsmeter.in/h-upload/2023/02/14/339241-ycp-to-run-jagan-anna-is-our-future-campaign-in-run-up-to-2024-polls.webp', 'https://telugu.newsmeter.in/h-upload/2023/02/14/339241-ycp-to-run-jagan-anna-is-our-future-campaign-in-run-up-to-2024-polls.webp', 'Caterer1', 'ap', 'speciality1', 'jbsj'),
-(2, 'https://telugu.newsmeter.in/h-upload/2023/02/14/339241-ycp-to-run-jagan-anna-is-our-future-campaign-in-run-up-to-2024-polls.webp', 'https://telugu.newsmeter.in/h-upload/2023/02/14/339241-ycp-to-run-jagan-anna-is-our-future-campaign-in-run-up-to-2024-polls.webp', 'https://telugu.newsmeter.in/h-upload/2023/02/14/339241-ycp-to-run-jagan-anna-is-our-future-campaign-in-run-up-to-2024-polls.webp', 'https://telugu.newsmeter.in/h-upload/2023/02/14/339241-ycp-to-run-jagan-anna-is-our-future-campaign-in-run-up-to-2024-polls.webp', 'Caterer1', 'ap', 'speciality1', 'jbsj');
+(1, 'https://c0.wallpaperflare.com/preview/56/821/69/gold-desktop-celebration-jewelry.jpg', 'https://c0.wallpaperflare.com/preview/56/821/69/gold-desktop-celebration-jewelry.jpg', 'https://c0.wallpaperflare.com/preview/56/821/69/gold-desktop-celebration-jewelry.jpg', 'https://c0.wallpaperflare.com/preview/56/821/69/gold-desktop-celebration-jewelry.jpg', 'Caterer1', 'ap', 'speciality1', 'jbsj'),
+(2, 'https://c0.wallpaperflare.com/preview/56/821/69/gold-desktop-celebration-jewelry.jpg', 'https://c0.wallpaperflare.com/preview/56/821/69/gold-desktop-celebration-jewelry.jpg', 'https://c0.wallpaperflare.com/preview/56/821/69/gold-desktop-celebration-jewelry.jpg', 'https://c0.wallpaperflare.com/preview/56/821/69/gold-desktop-celebration-jewelry.jpg', 'Caterer1', 'ap', 'speciality1', 'jbsj');
 
 -- --------------------------------------------------------
 
@@ -70,8 +91,8 @@ CREATE TABLE `decor` (
 --
 
 INSERT INTO `decor` (`id`, `img1`, `img2`, `img3`, `img4`, `name`, `address`, `theme`, `price`) VALUES
-(1, 'https://telugu.newsmeter.in/h-upload/2023/02/14/339241-ycp-to-run-jagan-anna-is-our-future-campaign-in-run-up-to-2024-polls.webp', 'https://telugu.newsmeter.in/h-upload/2023/02/14/339241-ycp-to-run-jagan-anna-is-our-future-campaign-in-run-up-to-2024-polls.webp', 'https://telugu.newsmeter.in/h-upload/2023/02/14/339241-ycp-to-run-jagan-anna-is-our-future-campaign-in-run-up-to-2024-polls.webp', 'https://telugu.newsmeter.in/h-upload/2023/02/14/339241-ycp-to-run-jagan-anna-is-our-future-campaign-in-run-up-to-2024-polls.webp', 'decor1', 'ap', 'decorthemer', 'knans'),
-(2, 'https://telugu.newsmeter.in/h-upload/2023/02/14/339241-ycp-to-run-jagan-anna-is-our-future-campaign-in-run-up-to-2024-polls.webp', 'https://telugu.newsmeter.in/h-upload/2023/02/14/339241-ycp-to-run-jagan-anna-is-our-future-campaign-in-run-up-to-2024-polls.webp', 'https://telugu.newsmeter.in/h-upload/2023/02/14/339241-ycp-to-run-jagan-anna-is-our-future-campaign-in-run-up-to-2024-polls.webp', 'https://telugu.newsmeter.in/h-upload/2023/02/14/339241-ycp-to-run-jagan-anna-is-our-future-campaign-in-run-up-to-2024-polls.webp', 'decor1', 'ap', 'decorthemer', 'knans');
+(1, 'https://c0.wallpaperflare.com/preview/56/821/69/gold-desktop-celebration-jewelry.jpg', 'https://c0.wallpaperflare.com/preview/56/821/69/gold-desktop-celebration-jewelry.jpg', 'https://c0.wallpaperflare.com/preview/56/821/69/gold-desktop-celebration-jewelry.jpg', 'https://c0.wallpaperflare.com/preview/56/821/69/gold-desktop-celebration-jewelry.jpg', 'decor1', 'ap', 'decorthemer', 'knans'),
+(2, 'https://c0.wallpaperflare.com/preview/56/821/69/gold-desktop-celebration-jewelry.jpg', 'https://c0.wallpaperflare.com/preview/56/821/69/gold-desktop-celebration-jewelry.jpg', 'https://c0.wallpaperflare.com/preview/56/821/69/gold-desktop-celebration-jewelry.jpg', 'https://c0.wallpaperflare.com/preview/56/821/69/gold-desktop-celebration-jewelry.jpg', 'decor1', 'ap', 'decorthemer', 'knans');
 
 -- --------------------------------------------------------
 
@@ -120,12 +141,18 @@ CREATE TABLE `venue` (
 --
 
 INSERT INTO `venue` (`id`, `img1`, `img2`, `img3`, `img4`, `name`, `address`, `capacity`, `price`) VALUES
-(1, 'https://telugu.newsmeter.in/h-upload/2023/02/14/339241-ycp-to-run-jagan-anna-is-our-future-campaign-in-run-up-to-2024-polls.webp', 'https://telugu.newsmeter.in/h-upload/2023/02/14/339241-ycp-to-run-jagan-anna-is-our-future-campaign-in-run-up-to-2024-polls.webp', 'https://telugu.newsmeter.in/h-upload/2023/02/14/339241-ycp-to-run-jagan-anna-is-our-future-campaign-in-run-up-to-2024-polls.webp', 'https://telugu.newsmeter.in/h-upload/2023/02/14/339241-ycp-to-run-jagan-anna-is-our-future-campaign-in-run-up-to-2024-polls.webp', 'jagan', 'jdscjksd', 'jcsdnc', 'nc dsv '),
-(3, 'https://telugu.newsmeter.in/h-upload/2023/02/14/339241-ycp-to-run-jagan-anna-is-our-future-campaign-in-run-up-to-2024-polls.webp', 'https://telugu.newsmeter.in/h-upload/2023/02/14/339241-ycp-to-run-jagan-anna-is-our-future-campaign-in-run-up-to-2024-polls.webp', 'https://telugu.newsmeter.in/h-upload/2023/02/14/339241-ycp-to-run-jagan-anna-is-our-future-campaign-in-run-up-to-2024-polls.webp', 'https://telugu.newsmeter.in/h-upload/2023/02/14/339241-ycp-to-run-jagan-anna-is-our-future-campaign-in-run-up-to-2024-polls.webp', 'jagan', 'jdscjksd', 'jcsdnc', 'nc dsv ');
+(1, 'https://c0.wallpaperflare.com/preview/56/821/69/gold-desktop-celebration-jewelry.jpg', 'https://c0.wallpaperflare.com/preview/56/821/69/gold-desktop-celebration-jewelry.jpg', 'https://c0.wallpaperflare.com/preview/56/821/69/gold-desktop-celebration-jewelry.jpg', 'https://c0.wallpaperflare.com/preview/56/821/69/gold-desktop-celebration-jewelry.jpg', 'Sample', 'jdscjksd', 'jcsdnc', 'nc dsv '),
+(3, 'https://c0.wallpaperflare.com/preview/56/821/69/gold-desktop-celebration-jewelry.jpg', 'https://c0.wallpaperflare.com/preview/56/821/69/gold-desktop-celebration-jewelry.jpg', 'https://c0.wallpaperflare.com/preview/56/821/69/gold-desktop-celebration-jewelry.jpg', 'https://c0.wallpaperflare.com/preview/56/821/69/gold-desktop-celebration-jewelry.jpg', 'Sample 2', 'jdscjksd', 'jcsdnc', 'nc dsv ');
 
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `cart`
+--
+ALTER TABLE `cart`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `caterer`
@@ -156,6 +183,12 @@ ALTER TABLE `venue`
 --
 
 --
+-- AUTO_INCREMENT for table `cart`
+--
+ALTER TABLE `cart`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+
+--
 -- AUTO_INCREMENT for table `caterer`
 --
 ALTER TABLE `caterer`
@@ -177,7 +210,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `venue`
 --
 ALTER TABLE `venue`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
