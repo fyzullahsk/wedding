@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
-import './Payments.css'; // Import CSS for styling
+import React, { useEffect, useState } from 'react';
+import './Payments.css';
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom'; 
 import Navbar from "../../Components/Navbar/Navbar";
-import { useNavigate } from 'react-router-dom'; // Import useNavigate
-
 
 function PaymentPage() {
     const navigate = useNavigate();
@@ -11,12 +11,39 @@ function PaymentPage() {
   const [expiryDate, setExpiryDate] = useState('');
   const [cvv, setCvv] = useState('');
   const [paymentMethod, setPaymentMethod] = useState('');
+  const [totalPrice, setTotalPrice] = useState(0);
+  const userId = localStorage.getItem('id'); 
+      useEffect(() => {
+      // Fetch total price for the current user
+      axios.get(`http://localhost:8081/gettotalprice/${userId}`)
+      .then(res => {
+        if (res.data.Status === 'Success') {
+          setTotalPrice(res.data.TotalPrice);
+        } else {
+          alert('Error');
+        }
+      })
+      .catch(err => console.log(err));
+  }, [userId]); // Fetch data again when userId changes
 
   const handlePayment = () => {
-    // Simulate payment success
-    alert('Payment Successful!');
-    navigate('/feedback');
-  };
+    // Make a POST request to store total amount in the payments table
+    axios.post('http://localhost:8081/makepayment', { userId, totalAmount: totalPrice })
+        .then(res => {
+            if (res.data.status === 'Success') {
+                // Payment successful, navigate to feedback page or perform any other action
+                alert('Payment Successful!');
+                navigate('/feedback');
+            } else {
+                // Handle error
+                alert('Payment failed. Please try again.');
+            }
+        })
+        .catch(err => {
+            console.error('Error making payment:', err);
+            alert('Payment failed. Please try again.');
+        });
+};
 
   return (
     <>
@@ -38,6 +65,10 @@ function PaymentPage() {
         <button className="payment-button" onClick={handlePayment}>Make Payment</button>
       </div>
     </div>
+    <div>
+        <p><b>Total Price:</b> {totalPrice}</p>
+
+      </div> 
     </>
   );
 }

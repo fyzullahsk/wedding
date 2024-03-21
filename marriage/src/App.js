@@ -21,6 +21,7 @@ import Decorers from "./Pages/Decorers/Decorers";
 import Caterers from "./Pages/Caterers/Caterers";
 import Bookings from "./Pages/Bookings/Bookings";
 import PaymentPage from "./Pages/Payments/Payments";
+import PaymentHistory from "./Pages/Payments/PaymentsHistory";
 function App() {
   return (
     <div className="App">
@@ -47,6 +48,7 @@ function App() {
           <Route path="/caterer" element={<Caterers/>}/>
           <Route path="/cart" element={<Bookings/>}/>
           <Route path="/payment" element={<PaymentPage/>}/>
+          <Route path="/paymenthistory" element={<PaymentHistory/>}/>
         </Routes>
       </BrowserRouter>
     </div>

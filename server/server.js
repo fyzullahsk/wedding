@@ -33,19 +33,20 @@ con.connect(function(err) {
 app.post('/login', (req, res) => {
     const sql = 'SELECT * FROM users WHERE email=? AND password=?';
     con.query(sql, [req.body.email, req.body.Password], (err, result) => {
-        if(err) return res.json({Status: "Error", Error: "Error in running query"});
-        if(result.length > 0) { 
-            const userType = result[0].userType; // Assuming userType is the field name in the database
+        if (err) return res.json({ Status: "Error", Error: "Error in running query" });
+        if (result.length > 0) {
+            const userType = result[0].userType;
             if (userType === 'admin') {
-                return res.json({Status: "admin"});
+                return res.json({ Status: "admin" });
             } else if (userType === 'customer') {
-                return res.json({Status: "customer"});
-            } 
+                return res.json({ Status: "customer", id: result[0].id }); // Assuming id is the field name for user ID
+            }
         } else {
-            return res.json({Status: "Error", Error: "Wrong Email or Password"});
+            return res.json({ Status: "Error", Error: "Wrong Email or Password" });
         }
     });
 });
+
 
 
 
@@ -284,16 +285,16 @@ app.put('/updatecaterer/:id', (req, res) => {
 
 
 app.post('/addtocart', (req, res) => {
-    const { name, address, price } = req.body;
+    const { userId, name, address, price } = req.body;
 
     // Validate request body
-    if (!name || !address || !price) {
+    if (!userId || !name || !address || !price) {
         return res.status(400).json({ error: "All fields are required" });
     }
 
     // Insert into cart table
-    con.query('INSERT INTO cart (name, address, price) VALUES (?, ?, ?)',
-        [name, address, price],
+    con.query('INSERT INTO cart (userId, name, address, price) VALUES (?, ?, ?, ?)',
+        [userId, name, address, price],
         (err, result) => {
             if (err) {
                 console.log("Error in adding to cart:", err);
@@ -306,24 +307,80 @@ app.post('/addtocart', (req, res) => {
     );
 });
 
-app.get('/getbookings',(req,res)=>{
-    const sql="SELECT * FROM cart";
-    con.query(sql,(err,result)=>{
-        if(err) return res.json({Error:"Got an error in the sql"});
-        return res.json({Status:"Success",Result:result})
-    })
-})
 
+app.get('/getbookings/:userId', (req, res) => {
+    const userId = req.params.userId; // Retrieve userId from query parameters
+    const sql = "SELECT * FROM cart WHERE userId = ?";
+    con.query(sql, [userId], (err, result) => {
+        if (err) return res.json({ Error: "Got an error in the sql" });
+        return res.json({ Status: "Success", Result: result });
+    });
+});
 
 // Get total price API
-app.get('/gettotalprice', (req, res) => {
-    const totalPriceQuery = "SELECT SUM(price) AS total_price FROM cart";
-    con.query(totalPriceQuery, (err, result) => {
-      if (err) return res.json({ Error: "Got an error in the sql" });
-      return res.json({ Status: "Success", TotalPrice: result[0].total_price });
+app.get('/gettotalprice/:userId', (req, res) => {
+    const userId = req.params.userId; // Retrieve userId from query parameters
+    const totalPriceQuery = "SELECT SUM(price) AS total_price FROM cart WHERE userId = ?";
+    con.query(totalPriceQuery, [userId], (err, result) => {
+        if (err) return res.json({ Error: "Got an error in the sql" });
+        return res.json({ Status: "Success", TotalPrice: result[0].total_price });
     });
-  });
-  
+});
+
+// DELETE route to remove an item from the cart
+app.delete('/removeitem/:userId/:itemId', (req, res) => {
+    const userId = req.params.userId;
+    const itemId = req.params.itemId;
+
+    // Perform the deletion operation in the database
+    const deleteQuery = "DELETE FROM cart WHERE userId = ? AND id = ?";
+    con.query(deleteQuery, [userId, itemId], (err, result) => {
+
+        // Check if any rows were affected (if the item was found and deleted)
+        if (result.affectedRows > 0) {
+            return res.json({ status: "Success", message: "Item removed from cart" });
+        } else {
+            return res.json({ status: "Error", message: "Item not found in cart" });
+        }
+    });
+});
+
+// POST route to store total amount
+app.post('/makepayment', (req, res) => {
+    const { userId, totalAmount } = req.body;
+
+    // Validate request body
+    if (!userId || !totalAmount) {
+        return res.status(400).json({ error: "Both userId and totalAmount are required" });
+    }
+
+    // Insert total amount into payments table
+    const insertQuery = "INSERT INTO payments (userId, totalAmount) VALUES (?, ?)";
+    con.query(insertQuery, [userId, totalAmount], (err, result) => {
+        if (err) {
+            console.log("Error making payment:", err);
+            return res.status(500).json({ error: "Internal Server Error" });
+        }
+
+        // Respond with success message
+        res.json({ status: "Success", message: "Payment successful" });
+    });
+});
+
+
+app.get('/paymenthistory/:userId', (req, res) => {
+    const userId = req.params.userId;
+
+    // Query the database to fetch payment history for the given user
+    const sql = "SELECT * FROM payments WHERE userId = ?";
+    con.query(sql, [userId], (err, result) => {
+        if (err) {
+            console.error("Error fetching payment history:", err);
+            return res.json({ Status: "Error", Message: "Error fetching payment history" });
+        }
+        return res.json({ Status: "Success", Result: result });
+    });
+});
 
 
 app.listen(8081, () => {

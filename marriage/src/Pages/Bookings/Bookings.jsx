@@ -8,10 +8,11 @@ function Bookings() {
   const navigate = useNavigate();
   const [data, setData] = useState([]);
   const [totalPrice, setTotalPrice] = useState(0);
+  const userId = localStorage.getItem('id'); // Assuming the user's ID is stored in localStorage
 
   useEffect(() => {
-    // Fetch bookings data
-    axios.get('http://localhost:8081/getbookings')
+    // Fetch bookings data for the current user
+    axios.get(`http://localhost:8081/getbookings/${userId}`)
       .then(res => {
         if (res.data.Status === 'Success') {
           setData(res.data.Result);
@@ -21,8 +22,8 @@ function Bookings() {
       })
       .catch(err => console.log(err));
 
-    // Fetch total price
-    axios.get('http://localhost:8081/gettotalprice')
+    // Fetch total price for the current user
+    axios.get(`http://localhost:8081/gettotalprice/${userId}`)
       .then(res => {
         if (res.data.Status === 'Success') {
           setTotalPrice(res.data.TotalPrice);
@@ -31,11 +32,44 @@ function Bookings() {
         }
       })
       .catch(err => console.log(err));
-  }, []);
+  }, [userId]); // Fetch data again when userId changes
 
-  // Function to simulate payment
+  // Function to remove an item from the cart
+  const handleRemove = (itemId) => {
+    axios.delete(`http://localhost:8081/removeitem/${userId}/${itemId}`)
+      .then(res => {
+        if (res.data.Status === 'Success') {
+          // Refresh data after successful removal
+          fetchData();
+        } else {
+          window.location.reload(true);
+          alert('Deleted Successfully');
+        }
+      })
+      .catch(err => console.log(err));
+  };
+
+  // Function to fetch data again after removing an item
+  const fetchData = () => {
+    axios.get(`http://localhost:8081/getbookings/${userId}`)
+      .then(res => {
+        if (res.data.status === 'Success') {
+          setData(res.data.Result);
+        } else {
+          alert('Error fetching data');
+        }
+      })
+      .catch(err => console.log(err));
+  };
+
+  // Function to navigate to the payment page
   const handlePayment = () => {
     navigate('/payment');
+  };
+
+  // Function to navigate to the payment history page
+  const handlePaymentHistory = () => {
+    navigate('/paymenthistory');
   };
 
   return (
@@ -53,6 +87,7 @@ function Bookings() {
                   <p><b>Name:</b> {val.name}</p>
                   <p><b>Address:</b> {val.address}</p>
                   <p><b>Price:</b> {val.price}</p>
+                  <button onClick={() => handleRemove(val.id)}>Remove</button>
                 </div>
               </div>
             );
@@ -64,7 +99,8 @@ function Bookings() {
       <div>
         <p><b>Total Price:</b> {totalPrice}</p>
         <button onClick={handlePayment}>Make Payment</button>
-      </div> {/* Display total price and payment button */}
+        <button onClick={handlePaymentHistory}>Payment History</button>
+      </div> 
     </>
   );
 }

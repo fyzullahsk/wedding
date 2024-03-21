@@ -19,22 +19,26 @@ export default function Login() {
     const handleOnClick = (event) => {
         event.preventDefault();
         
-          axios
+        axios
             .post('http://localhost:8081/login', values)
             .then((res) => {
-              if (res.data.Status === 'admin') {
-                navigate('/AdminDashboard');
-              } else if (res.data.Status === 'customer') {
-                navigate('/dashboard');
-              } 
-               else {
-                navigate('/Signup');
-                alert('Invalid Credentials. Please Register.');
-              }
+                if (res.data.Status === 'admin') {
+                    localStorage.setItem('authenticatedUser', false);
+                    localStorage.setItem('authenticatedAdmin', true);
+                    navigate('/AdminDashboard');
+                } else if (res.data.Status === 'customer') {
+                    localStorage.setItem('id', res.data.id); // Assuming id is returned from the server
+                    localStorage.setItem('authenticatedUser', true);
+                    localStorage.setItem('authenticatedAdmin', false);
+                    navigate('/dashboard');
+                } else {
+                    navigate('/register');
+                    alert('Invalid Credentials. Please Register.');
+                }
             })
             .catch((err) => console.log(err));
-        
-      };
+    };
+    
 
     return (
         <>

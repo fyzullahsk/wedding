@@ -26,8 +26,10 @@ function Venues() {
     // Extract required data from the venue object
     const { name, address, price } = venue;
 
-    // Create a payload object with the required data
-    const payload = { name, address, price };
+    const userId = localStorage.getItem('id');
+
+    // Create a payload object with the required data including user ID
+    const payload = { userId, name, address, price };
 
     axios.post('http://localhost:8081/addtocart', payload)
       .then(res => {

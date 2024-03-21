@@ -25,9 +25,11 @@ function Caterers() {
   const handleAddToCart = (caterer) => {
     // Extract required data from the caterer object
     const { name, address, price } = caterer;
+    
+    const userId = localStorage.getItem('id');
 
-    // Create a payload object with the required data
-    const payload = { name, address, price };
+    // Create a payload object with the required data including user ID
+    const payload = { userId, name, address, price };
 
     axios.post('http://localhost:8081/addtocart', payload)
       .then(res => {
