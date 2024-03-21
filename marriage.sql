@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 11, 2024 at 05:22 PM
+-- Generation Time: Mar 21, 2024 at 04:12 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -31,7 +31,7 @@ CREATE TABLE `cart` (
   `id` int(11) NOT NULL,
   `name` text NOT NULL,
   `address` text NOT NULL,
-  `price` text NOT NULL
+  `price` bigint(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -39,8 +39,9 @@ CREATE TABLE `cart` (
 --
 
 INSERT INTO `cart` (`id`, `name`, `address`, `price`) VALUES
-(14, 'decor1', 'ap', 'knans'),
-(15, 'Caterer1', 'ap', 'jbsj');
+(16, 'Caterer 1', 'Vijayawada', 1200),
+(17, 'Decor1', 'Hyd', 1300),
+(18, 'Venue1', 'Che', 1400);
 
 -- --------------------------------------------------------
 
@@ -57,7 +58,7 @@ CREATE TABLE `caterer` (
   `name` text NOT NULL,
   `address` text NOT NULL,
   `speciality` text NOT NULL,
-  `price` text NOT NULL
+  `price` bigint(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -65,8 +66,8 @@ CREATE TABLE `caterer` (
 --
 
 INSERT INTO `caterer` (`id`, `img1`, `img2`, `img3`, `img4`, `name`, `address`, `speciality`, `price`) VALUES
-(1, 'https://c0.wallpaperflare.com/preview/56/821/69/gold-desktop-celebration-jewelry.jpg', 'https://c0.wallpaperflare.com/preview/56/821/69/gold-desktop-celebration-jewelry.jpg', 'https://c0.wallpaperflare.com/preview/56/821/69/gold-desktop-celebration-jewelry.jpg', 'https://c0.wallpaperflare.com/preview/56/821/69/gold-desktop-celebration-jewelry.jpg', 'Caterer1', 'ap', 'speciality1', 'jbsj'),
-(2, 'https://c0.wallpaperflare.com/preview/56/821/69/gold-desktop-celebration-jewelry.jpg', 'https://c0.wallpaperflare.com/preview/56/821/69/gold-desktop-celebration-jewelry.jpg', 'https://c0.wallpaperflare.com/preview/56/821/69/gold-desktop-celebration-jewelry.jpg', 'https://c0.wallpaperflare.com/preview/56/821/69/gold-desktop-celebration-jewelry.jpg', 'Caterer1', 'ap', 'speciality1', 'jbsj');
+(4, 'https://c0.wallpaperflare.com/preview/56/821/69/gold-desktop-celebration-jewelry.jpg', 'https://c0.wallpaperflare.com/preview/56/821/69/gold-desktop-celebration-jewelry.jpg', 'https://c0.wallpaperflare.com/preview/56/821/69/gold-desktop-celebration-jewelry.jpg', 'https://c0.wallpaperflare.com/preview/56/821/69/gold-desktop-celebration-jewelry.jpg', 'Caterer 1', 'Vijayawada', 'Modern', 1200),
+(5, 'https://c0.wallpaperflare.com/preview/56/821/69/gold-desktop-celebration-jewelry.jpg', 'https://c0.wallpaperflare.com/preview/56/821/69/gold-desktop-celebration-jewelry.jpg', 'https://c0.wallpaperflare.com/preview/56/821/69/gold-desktop-celebration-jewelry.jpg', 'https://c0.wallpaperflare.com/preview/56/821/69/gold-desktop-celebration-jewelry.jpg', 'Caterer 1', 'Delhi', 'Modern', 1900);
 
 -- --------------------------------------------------------
 
@@ -83,7 +84,7 @@ CREATE TABLE `decor` (
   `name` text NOT NULL,
   `address` text NOT NULL,
   `theme` text NOT NULL,
-  `price` text NOT NULL
+  `price` bigint(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -91,8 +92,7 @@ CREATE TABLE `decor` (
 --
 
 INSERT INTO `decor` (`id`, `img1`, `img2`, `img3`, `img4`, `name`, `address`, `theme`, `price`) VALUES
-(1, 'https://c0.wallpaperflare.com/preview/56/821/69/gold-desktop-celebration-jewelry.jpg', 'https://c0.wallpaperflare.com/preview/56/821/69/gold-desktop-celebration-jewelry.jpg', 'https://c0.wallpaperflare.com/preview/56/821/69/gold-desktop-celebration-jewelry.jpg', 'https://c0.wallpaperflare.com/preview/56/821/69/gold-desktop-celebration-jewelry.jpg', 'decor1', 'ap', 'decorthemer', 'knans'),
-(2, 'https://c0.wallpaperflare.com/preview/56/821/69/gold-desktop-celebration-jewelry.jpg', 'https://c0.wallpaperflare.com/preview/56/821/69/gold-desktop-celebration-jewelry.jpg', 'https://c0.wallpaperflare.com/preview/56/821/69/gold-desktop-celebration-jewelry.jpg', 'https://c0.wallpaperflare.com/preview/56/821/69/gold-desktop-celebration-jewelry.jpg', 'decor1', 'ap', 'decorthemer', 'knans');
+(4, 'https://c0.wallpaperflare.com/preview/56/821/69/gold-desktop-celebration-jewelry.jpg', 'https://c0.wallpaperflare.com/preview/56/821/69/gold-desktop-celebration-jewelry.jpg', 'https://c0.wallpaperflare.com/preview/56/821/69/gold-desktop-celebration-jewelry.jpg', 'https://c0.wallpaperflare.com/preview/56/821/69/gold-desktop-celebration-jewelry.jpg', 'Decor1', 'Hyd', 'Modern', 1300);
 
 -- --------------------------------------------------------
 
@@ -106,17 +106,19 @@ CREATE TABLE `users` (
   `lastName` text NOT NULL,
   `email` text NOT NULL,
   `phone` text NOT NULL,
-  `password` text NOT NULL
+  `password` text NOT NULL,
+  `userType` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `firstName`, `lastName`, `email`, `phone`, `password`) VALUES
-(1, 'Suresh', 'Ganta', 'Suresh@gmail.com', '929929292', 'Suresh'),
-(2, 'admin', 'admin', 'admin@gmail.com', 'admin', 'admin'),
-(3, 'Fyzu', 'Fyzu', 'Fyzu@gmail.com', '67777', 'Fyzu');
+INSERT INTO `users` (`id`, `firstName`, `lastName`, `email`, `phone`, `password`, `userType`) VALUES
+(1, 'Suresh', 'Ganta', 'Suresh@gmail.com', '929929292', 'Suresh', 'customer'),
+(2, 'admin', 'admin', 'admin@gmail.com', 'admin', 'admin', 'admin'),
+(3, 'Fyzu', 'Fyzu', 'Fyzu@gmail.com', '67777', 'Fyzu', 'customer'),
+(4, 'pavan', 'chintakayala', 'samplea@gmail.com', '1345654332', 'Sample@123', 'admin');
 
 -- --------------------------------------------------------
 
@@ -133,7 +135,7 @@ CREATE TABLE `venue` (
   `name` text NOT NULL,
   `address` text NOT NULL,
   `capacity` text NOT NULL,
-  `price` text NOT NULL
+  `price` bigint(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -141,8 +143,7 @@ CREATE TABLE `venue` (
 --
 
 INSERT INTO `venue` (`id`, `img1`, `img2`, `img3`, `img4`, `name`, `address`, `capacity`, `price`) VALUES
-(1, 'https://c0.wallpaperflare.com/preview/56/821/69/gold-desktop-celebration-jewelry.jpg', 'https://c0.wallpaperflare.com/preview/56/821/69/gold-desktop-celebration-jewelry.jpg', 'https://c0.wallpaperflare.com/preview/56/821/69/gold-desktop-celebration-jewelry.jpg', 'https://c0.wallpaperflare.com/preview/56/821/69/gold-desktop-celebration-jewelry.jpg', 'Sample', 'jdscjksd', 'jcsdnc', 'nc dsv '),
-(3, 'https://c0.wallpaperflare.com/preview/56/821/69/gold-desktop-celebration-jewelry.jpg', 'https://c0.wallpaperflare.com/preview/56/821/69/gold-desktop-celebration-jewelry.jpg', 'https://c0.wallpaperflare.com/preview/56/821/69/gold-desktop-celebration-jewelry.jpg', 'https://c0.wallpaperflare.com/preview/56/821/69/gold-desktop-celebration-jewelry.jpg', 'Sample 2', 'jdscjksd', 'jcsdnc', 'nc dsv ');
+(5, 'https://c0.wallpaperflare.com/preview/56/821/69/gold-desktop-celebration-jewelry.jpg', 'https://c0.wallpaperflare.com/preview/56/821/69/gold-desktop-celebration-jewelry.jpg', 'https://c0.wallpaperflare.com/preview/56/821/69/gold-desktop-celebration-jewelry.jpg', 'https://c0.wallpaperflare.com/preview/56/821/69/gold-desktop-celebration-jewelry.jpg', 'Venue1', 'Che', '1200', 1400);
 
 --
 -- Indexes for dumped tables
@@ -186,31 +187,31 @@ ALTER TABLE `venue`
 -- AUTO_INCREMENT for table `cart`
 --
 ALTER TABLE `cart`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT for table `caterer`
 --
 ALTER TABLE `caterer`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `decor`
 --
 ALTER TABLE `decor`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `venue`
 --
 ALTER TABLE `venue`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

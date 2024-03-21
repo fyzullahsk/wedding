@@ -31,47 +31,46 @@ con.connect(function(err) {
 
 
 app.post('/login', (req, res) => {
-    const { Username, Password } = req.body;
-
-    if (!Username || !Password) {
-        return res.status(400).json({ error: "Username and Password are required" });
-    }
-
-    con.query('SELECT * FROM users WHERE email = ? AND password = ?', [Username, Password], (err, results) => {
-        if (err) {
-            console.error("Error in login query:", err);
-            return res.status(500).json({ error: "Internal Server Error" });
+    const sql = 'SELECT * FROM users WHERE email=? AND password=?';
+    con.query(sql, [req.body.email, req.body.Password], (err, result) => {
+        if(err) return res.json({Status: "Error", Error: "Error in running query"});
+        if(result.length > 0) { 
+            const userType = result[0].userType; // Assuming userType is the field name in the database
+            if (userType === 'admin') {
+                return res.json({Status: "admin"});
+            } else if (userType === 'customer') {
+                return res.json({Status: "customer"});
+            } 
+        } else {
+            return res.json({Status: "Error", Error: "Wrong Email or Password"});
         }
-
-        if (results.length === 0) {
-            return res.status(401).json({ error: "Invalid username or password" });
-        }
-
-        res.json({ message: "Login successful", user: results[0] });
     });
 });
 
 
+
+
 app.post('/register', (req, res) => {
-    const { firstName, lastName, email, phone, password } = req.body;
+    const { firstName, lastName, email, phone, password, userType } = req.body;
 
     
-    if (!firstName || !lastName || !email || !phone || !password) {
+    if (!firstName || !lastName || !email || !phone || !password || !userType) {
         return res.status(400).json({ error: "All fields are required" });
     }
 
     
-    con.query('INSERT INTO users (firstName, lastName, email, phone, password) VALUES (?, ?, ?, ?, ?)',
-        [firstName, lastName, email, phone, password],
-        (err, result) => {
-            if (err) {
-                console.log("Error in registration query:", err);
-                return res.status(500).json({ error: "Internal Server Error" });
-            }
-
-            res.json({ message: "Registration successful", user: { id: result.insertId, firstName, lastName, email, phone } });
+    con.query('INSERT INTO users (firstName, lastName, email, phone, password, userType) VALUES (?, ?, ?, ?, ?, ?)',
+    [firstName, lastName, email, phone, password, userType], // Include userType as a value
+    (err, result) => {
+        if (err) {
+            console.log("Error in registration query:", err);
+            return res.status(500).json({ error: "Internal Server Error" });
         }
-    );
+
+        res.json({ message: "Registration successful", user: { id: result.insertId, firstName, lastName, email, phone } });
+    }
+);
+
 });
 
 
@@ -314,6 +313,17 @@ app.get('/getbookings',(req,res)=>{
         return res.json({Status:"Success",Result:result})
     })
 })
+
+
+// Get total price API
+app.get('/gettotalprice', (req, res) => {
+    const totalPriceQuery = "SELECT SUM(price) AS total_price FROM cart";
+    con.query(totalPriceQuery, (err, result) => {
+      if (err) return res.json({ Error: "Got an error in the sql" });
+      return res.json({ Status: "Success", TotalPrice: result[0].total_price });
+    });
+  });
+  
 
 
 app.listen(8081, () => {

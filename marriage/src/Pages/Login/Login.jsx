@@ -8,7 +8,7 @@ export default function Login() {
     const navigate = useNavigate();
     const [errors, setError] = useState({});
     const [values, setValues] = useState({
-        Username: '',
+        email: '',
         Password: ''
     });
 
@@ -16,26 +16,29 @@ export default function Login() {
         setValues({ ...values, [event.target.name]: event.target.value });
     };
 
-    const handleOnClick = async () => {
-        try {
-            const response = await axios.post('http://localhost:8081/login', values);
-            console.log(response.data); // Handle successful login response
-            if (values.Username === 'admin' && values.Password === 'admin') {
+    const handleOnClick = (event) => {
+        event.preventDefault();
+        
+          axios
+            .post('http://localhost:8081/login', values)
+            .then((res) => {
+              if (res.data.Status === 'admin') {
                 navigate('/AdminDashboard');
-            } else {
+              } else if (res.data.Status === 'customer') {
                 navigate('/dashboard');
-            }
-        } catch (error) {
-            console.error('Login error:', error.response.data);
-            alert("Invalid Credentials");
-            setError(error.response.data);
-        }
-    };
-
+              } 
+               else {
+                navigate('/Signup');
+                alert('Invalid Credentials. Please Register.');
+              }
+            })
+            .catch((err) => console.log(err));
+        
+      };
 
     return (
         <>
-        <LandingNav/>
+            <LandingNav />
             <div className="login-main d-flex justify-content-center">
                 <div className="header"><br></br>
                     <div>
@@ -46,11 +49,10 @@ export default function Login() {
                     </div>
                 </div>
                 <div className="login-details">
-
                     <div className="d-flex flex-column g-1 px-2 login-inputs">
                         <div>Email Id</div>
-                        <input type="text" name='Username' value={values.Username} onChange={handleChange} autoComplete="off" required />
-                        {errors.Username && <div className="error-message">{errors.Username}</div>}
+                        <input type="text" name='email' value={values.email} onChange={handleChange} autoComplete="off" required />
+                        {errors.email && <div className="error-message">{errors.email}</div>}
                     </div>
                     <div className="d-flex flex-column g-1 px-2 mb-3 login-inputs">
                         <div>Password</div>
@@ -58,8 +60,7 @@ export default function Login() {
                         {errors.Password && <div className="error-message">{errors.Password}</div>}
                     </div>
                     {errors.errorMessage && <div className="error-message">{errors.errorMessage}</div>}
-
-                    <button onClick={handleOnClick}  id="login">Login</button>
+                    <button onClick={handleOnClick} id="login">Login</button>
                     <div>
                         Not a member? <Link to={"/register"}>Register</Link>
                     </div>

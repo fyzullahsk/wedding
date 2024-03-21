@@ -20,6 +20,7 @@ import Venues from "./Pages/Venue/Venues";
 import Decorers from "./Pages/Decorers/Decorers";
 import Caterers from "./Pages/Caterers/Caterers";
 import Bookings from "./Pages/Bookings/Bookings";
+import PaymentPage from "./Pages/Payments/Payments";
 function App() {
   return (
     <div className="App">
@@ -45,6 +46,7 @@ function App() {
           <Route path="/decorer" element={<Decorers/>}/>
           <Route path="/caterer" element={<Caterers/>}/>
           <Route path="/cart" element={<Bookings/>}/>
+          <Route path="/payment" element={<PaymentPage/>}/>
         </Routes>
       </BrowserRouter>
     </div>
