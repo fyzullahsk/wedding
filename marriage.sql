@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 21, 2024 at 04:12 AM
+-- Generation Time: Mar 21, 2024 at 04:51 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -28,6 +28,7 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `cart` (
+  `userId` int(11) NOT NULL,
   `id` int(11) NOT NULL,
   `name` text NOT NULL,
   `address` text NOT NULL,
@@ -38,10 +39,18 @@ CREATE TABLE `cart` (
 -- Dumping data for table `cart`
 --
 
-INSERT INTO `cart` (`id`, `name`, `address`, `price`) VALUES
-(16, 'Caterer 1', 'Vijayawada', 1200),
-(17, 'Decor1', 'Hyd', 1300),
-(18, 'Venue1', 'Che', 1400);
+INSERT INTO `cart` (`userId`, `id`, `name`, `address`, `price`) VALUES
+(1, 19, 'Caterer 1', 'Vijayawada', 1200),
+(1, 20, 'Venue1', 'Che', 1400),
+(1, 21, 'Decor1', 'Hyd', 1300),
+(1, 23, 'Decor1', 'Hyd', 1300),
+(2, 24, 'Decor1', 'Hyd', 1300),
+(1, 25, 'Venue1', 'Che', 1400),
+(1, 26, 'Venue1', 'Che', 1400),
+(3, 33, 'Decor1', 'Hyd', 1300),
+(3, 36, 'Decor1', 'Hyd', 1300),
+(3, 37, 'Decor1', 'Hyd', 1300),
+(1, 38, 'Decor1', 'Hyd', 1300);
 
 -- --------------------------------------------------------
 
@@ -93,6 +102,27 @@ CREATE TABLE `decor` (
 
 INSERT INTO `decor` (`id`, `img1`, `img2`, `img3`, `img4`, `name`, `address`, `theme`, `price`) VALUES
 (4, 'https://c0.wallpaperflare.com/preview/56/821/69/gold-desktop-celebration-jewelry.jpg', 'https://c0.wallpaperflare.com/preview/56/821/69/gold-desktop-celebration-jewelry.jpg', 'https://c0.wallpaperflare.com/preview/56/821/69/gold-desktop-celebration-jewelry.jpg', 'https://c0.wallpaperflare.com/preview/56/821/69/gold-desktop-celebration-jewelry.jpg', 'Decor1', 'Hyd', 'Modern', 1300);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `payments`
+--
+
+CREATE TABLE `payments` (
+  `id` int(11) NOT NULL,
+  `userId` int(11) NOT NULL,
+  `totalAmount` bigint(20) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `payments`
+--
+
+INSERT INTO `payments` (`id`, `userId`, `totalAmount`) VALUES
+(1, 3, 3900),
+(2, 3, 3900),
+(3, 1, 9300);
 
 -- --------------------------------------------------------
 
@@ -168,6 +198,12 @@ ALTER TABLE `decor`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `payments`
+--
+ALTER TABLE `payments`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `users`
 --
 ALTER TABLE `users`
@@ -187,7 +223,7 @@ ALTER TABLE `venue`
 -- AUTO_INCREMENT for table `cart`
 --
 ALTER TABLE `cart`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
 
 --
 -- AUTO_INCREMENT for table `caterer`
@@ -200,6 +236,12 @@ ALTER TABLE `caterer`
 --
 ALTER TABLE `decor`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT for table `payments`
+--
+ALTER TABLE `payments`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `users`
