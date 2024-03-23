@@ -15,7 +15,8 @@ const AddDecorer = () => {
         name: "",
         address: "",
         theme: "",
-        price: ""
+        price: "",
+        date: "" // New date field
     });
 
     const handleChange = (event) => {
@@ -37,7 +38,8 @@ const AddDecorer = () => {
                 name: decorData.name,
                 address: decorData.address,
                 theme: decorData.theme,
-                price: decorData.price
+                price: decorData.price,
+                date: decorData.date // Include date in the request
             });
             console.log(response.data); // Handle successful response
             // Redirect or any other desired action
@@ -148,6 +150,16 @@ const AddDecorer = () => {
                                     required
                                 />
                             </div>
+                            <div className="category-crud-input">
+                            <label>Date</label>
+                            <input
+                                type="date"
+                                name="date"
+                                value={decorData.date}
+                                onChange={handleChange}
+                                required
+                            />
+                        </div> 
                         </div>
                     </div>
                     <div className="category-crud-buttons">

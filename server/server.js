@@ -82,19 +82,39 @@ app.get('/getvenue',(req,res)=>{
         return res.json({Status:"Success",Result:result})
     })
 })
-app.get('/getvenue/:id', (req, res) => {
+app.get('/getvenue/:id',(req,res)=>{
     const id = req.params.id;
-    const sql = 'SELECT * FROM venue WHERE id = ?';
-    con.query(sql, [id], (err, result) => {
-      if (err) {
-        return res.json({ Error: "Error in SQL" });
-      }
-      if (result.length === 0) {
-        return res.json({ Error: "Not found" });
-      }
-      return res.json({ Status: "Success", Result: result });
-    });
-  });
+    const sql="SELECT * FROM venue WHERE id = ?";
+    con.query(sql, [id], (err,result)=>{
+        if(err) return res.json({Error:"Got an error in the sql"});
+        return res.json({Status:"Success",Result:result})
+    })
+})
+
+
+app.get('/getvenuedate', (req, res) => {
+    // Extract the selected date from the query parameters
+    const selectedDate = req.query.date;
+
+    // Extract the selected location from the query parameters
+    const selectedLocation = req.query.location;
+
+    // If a date and location are provided, fetch venue data for that date and location
+    if (selectedDate && selectedLocation) {
+        const sql = "SELECT * FROM venue WHERE date = ? AND address = ?";
+        con.query(sql, [selectedDate, selectedLocation], (err, result) => {
+            if (err) {
+                console.error('Error fetching venue data:', err);
+                return res.status(500).json({ error: 'Internal Server Error' });
+            }
+            return res.json(result);
+        });
+    }  else {
+        // If neither date nor location are provided, return an error
+        return res.status(400).json({ error: 'Date and location are required parameters' });
+    }
+});
+
 
 app.delete('/deletevenue/:id',(req,res)=>{
     const id = req.params.id;
@@ -112,6 +132,38 @@ app.get('/getdecor',(req,res)=>{
         return res.json({Status:"Success",Result:result})
     })
 })
+
+app.get('/getdecor/:id',(req,res)=>{
+    const id = req.params.id;
+    const sql="SELECT * FROM decor WHERE id = ?";
+    con.query(sql, [id], (err,result)=>{
+        if(err) return res.json({Error:"Got an error in the sql"});
+        return res.json({Status:"Success",Result:result})
+    })
+})
+
+app.get('/getdecordate', (req, res) => {
+    // Extract the selected date from the query parameters
+    const selectedDate = req.query.date;
+
+    // Extract the selected location from the query parameters
+    const selectedLocation = req.query.location;
+
+    // If a date and location are provided, fetch venue data for that date and location
+    if (selectedDate && selectedLocation) {
+        const sql = "SELECT * FROM decor WHERE date = ? AND address = ?";
+        con.query(sql, [selectedDate, selectedLocation], (err, result) => {
+            if (err) {
+                console.error('Error fetching venue data:', err);
+                return res.status(500).json({ error: 'Internal Server Error' });
+            }
+            return res.json(result);
+        });
+    }  else {
+        // If neither date nor location are provided, return an error
+        return res.status(400).json({ error: 'Date and location are required parameters' });
+    }
+});
 
 app.delete('/deletedecor/:id',(req,res)=>{
     const id = req.params.id;
@@ -131,6 +183,42 @@ app.get('/getcaterer',(req,res)=>{
     })
 })
 
+
+app.get('/getcaterer/:id', (req, res) => {
+    const id = req.params.id;
+    const sql = "SELECT * FROM caterer WHERE id = ?";
+    con.query(sql, [id], (err, result) => { 
+        if (err) return res.json({ Error: "Got an error in the sql" });
+        return res.json({ Status: "Success", Result: result });
+    });
+});
+
+app.get('/getcatererdate', (req, res) => {
+    // Extract the selected date from the query parameters
+    const selectedDate = req.query.date;
+
+    // Extract the selected location from the query parameters
+    const selectedLocation = req.query.location;
+
+    // If a date and location are provided, fetch venue data for that date and location
+    if (selectedDate && selectedLocation) {
+        const sql = "SELECT * FROM caterer WHERE date = ? AND address = ?";
+        con.query(sql, [selectedDate, selectedLocation], (err, result) => {
+            if (err) {
+                console.error('Error fetching venue data:', err);
+                return res.status(500).json({ error: 'Internal Server Error' });
+            }
+            return res.json(result);
+        });
+    }  else {
+        // If neither date nor location are provided, return an error
+        return res.status(400).json({ error: 'Date and location are required parameters' });
+    }
+});
+
+
+
+
 app.delete('/deletecaterer/:id',(req,res)=>{
     const id = req.params.id;
     const sql='DELETE FROM caterer WHERE id = ?';
@@ -143,23 +231,23 @@ app.delete('/deletecaterer/:id',(req,res)=>{
 
 // Route for handling adding venue
 app.post('/addvenue', (req, res) => {
-    const { img1, img2, img3, img4, name, address, capacity, price } = req.body;
+    const { img1, img2, img3, img4, name, address, capacity, price, date } = req.body;
 
     // Validate request body
-    if (!img1 || !img2 || !img3 || !img4 || !name || !address || !capacity || !price) {
+    if (!img1 || !img2 || !img3 || !img4 || !name || !address || !capacity || !price || !date) {
         return res.status(400).json({ error: "All fields are required" });
     }
 
     // Insert into database
-    con.query('INSERT INTO venue (img1, img2, img3, img4, name, address, capacity, price) VALUES (?, ?, ?, ?, ?, ?, ?, ?)',
-        [img1, img2, img3, img4, name, address, capacity, price],
+    con.query('INSERT INTO venue (img1, img2, img3, img4, name, address, capacity, price, date) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)',
+        [img1, img2, img3, img4, name, address, capacity, price, date],
         (err, result) => {
             if (err) {
                 console.log("Error in adding venue query:", err);
                 return res.status(500).json({ error: "Internal Server Error" });
             }
 
-            res.json({ message: "Venue added successfully", venue: { id: result.insertId, img1, img2, img3, img4, name, address, capacity, price } });
+            res.json({ message: "Venue added successfully", venue: { id: result.insertId, img1, img2, img3, img4, name, address, capacity, price, date } });
         }
     );
 });
@@ -168,16 +256,16 @@ app.post('/addvenue', (req, res) => {
 // Update a venue
 app.put('/updatevenue/:id', (req, res) => {
     const venueId = req.params.id;
-    const { img1, img2, img3, img4, name, address, capacity, price } = req.body;
+    const { img1, img2, img3, img4, name, address, capacity, price, date } = req.body;
 
     // Validate request body
-    if (!img1 || !img2 || !img3 || !img4 || !name || !address || !capacity || !price) {
+    if (!img1 || !img2 || !img3 || !img4 || !name || !address || !capacity || !price || !date) {
         return res.status(400).json({ error: "All fields are required" });
     }
 
     // Update venue in the database
-    const sql = `UPDATE venue SET img1=?, img2=?, img3=?, img4=?, name=?, address=?, capacity=?, price=? WHERE id=?`;
-    con.query(sql, [img1, img2, img3, img4, name, address, capacity, price, venueId], (err, result) => {
+    const sql = `UPDATE venue SET img1=?, img2=?, img3=?, img4=?, name=?, address=?, capacity=?, price=?, date=? WHERE id=?`;
+    con.query(sql, [img1, img2, img3, img4, name, address, capacity, price, date, venueId], (err, result) => {
         if (err) {
             console.log("Error updating venue:", err);
             return res.status(500).json({ error: "Internal Server Error" });
@@ -191,23 +279,23 @@ app.put('/updatevenue/:id', (req, res) => {
 
 // Route for handling adding venue
 app.post('/adddecor', (req, res) => {
-    const { img1, img2, img3, img4, name, address, theme, price } = req.body;
+    const { img1, img2, img3, img4, name, address, theme, price, date } = req.body;
 
     // Validate request body
-    if (!img1 || !img2 || !img3 || !img4 || !name || !address || !theme || !price) {
+    if (!img1 || !img2 || !img3 || !img4 || !name || !address || !theme || !price || !date) {
         return res.status(400).json({ error: "All fields are required" });
     }
 
     // Insert into database
-    con.query('INSERT INTO decor (img1, img2, img3, img4, name, address, theme, price) VALUES (?, ?, ?, ?, ?, ?, ?, ?)',
-        [img1, img2, img3, img4, name, address, theme, price],
+    con.query('INSERT INTO decor (img1, img2, img3, img4, name, address, theme, price, date) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)',
+        [img1, img2, img3, img4, name, address, theme, price, date],
         (err, result) => {
             if (err) {
                 console.log("Error in adding venue query:", err);
                 return res.status(500).json({ error: "Internal Server Error" });
             }
 
-            res.json({ message: "Venue added successfully", venue: { id: result.insertId, img1, img2, img3, img4, name, address, theme, price } });
+            res.json({ message: "Venue added successfully", venue: { id: result.insertId, img1, img2, img3, img4, name, address, theme, price, date } });
         }
     );
 });
@@ -216,16 +304,16 @@ app.post('/adddecor', (req, res) => {
 // Update a venue
 app.put('/updatedecorer/:id', (req, res) => {
     const venueId = req.params.id;
-    const { img1, img2, img3, img4, name, address, theme, price } = req.body;
+    const { img1, img2, img3, img4, name, address, theme, price, date } = req.body;
 
     // Validate request body
-    if (!img1 || !img2 || !img3 || !img4 || !name || !address || !theme || !price) {
+    if (!img1 || !img2 || !img3 || !img4 || !name || !address || !theme || !price || !date) {
         return res.status(400).json({ error: "All fields are required" });
     }
 
     // Update venue in the database
-    const sql = `UPDATE decor SET img1=?, img2=?, img3=?, img4=?, name=?, address=?, theme=?, price=? WHERE id=?`;
-    con.query(sql, [img1, img2, img3, img4, name, address, theme, price, venueId], (err, result) => {
+    const sql = `UPDATE decor SET img1=?, img2=?, img3=?, img4=?, name=?, address=?, theme=?, price=?, date=? WHERE id=?`;
+    con.query(sql, [img1, img2, img3, img4, name, address, theme, price, date, venueId], (err, result) => {
         if (err) {
             console.log("Error updating venue:", err);
             return res.status(500).json({ error: "Internal Server Error" });
@@ -239,23 +327,23 @@ app.put('/updatedecorer/:id', (req, res) => {
 
 // Route for handling adding venue
 app.post('/addcaterer', (req, res) => {
-    const { img1, img2, img3, img4, name, address, speciality, price } = req.body;
+    const { img1, img2, img3, img4, name, address, speciality, price, date } = req.body;
 
     // Validate request body
-    if (!img1 || !img2 || !img3 || !img4 || !name || !address || !speciality || !price) {
+    if (!img1 || !img2 || !img3 || !img4 || !name || !address || !speciality || !price || !date) {
         return res.status(400).json({ error: "All fields are required" });
     }
 
     // Insert into database
-    con.query('INSERT INTO caterer (img1, img2, img3, img4, name, address, speciality, price) VALUES (?, ?, ?, ?, ?, ?, ?, ?)',
-        [img1, img2, img3, img4, name, address, speciality, price],
+    con.query('INSERT INTO caterer (img1, img2, img3, img4, name, address, speciality, price, date) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)',
+        [img1, img2, img3, img4, name, address, speciality, price, date],
         (err, result) => {
             if (err) {
                 console.log("Error in adding venue query:", err);
                 return res.status(500).json({ error: "Internal Server Error" });
             }
 
-            res.json({ message: "Venue added successfully", venue: { id: result.insertId, img1, img2, img3, img4, name, address, speciality, price } });
+            res.json({ message: "Venue added successfully", venue: { id: result.insertId, img1, img2, img3, img4, name, address, speciality, price, date } });
         }
     );
 });
@@ -264,16 +352,16 @@ app.post('/addcaterer', (req, res) => {
 // Update a venue
 app.put('/updatecaterer/:id', (req, res) => {
     const venueId = req.params.id;
-    const { img1, img2, img3, img4, name, address, speciality, price } = req.body;
+    const { img1, img2, img3, img4, name, address, speciality, price, date } = req.body;
 
     // Validate request body
-    if (!img1 || !img2 || !img3 || !img4 || !name || !address || !speciality || !price) {
+    if (!img1 || !img2 || !img3 || !img4 || !name || !address || !speciality || !price ||! date) {
         return res.status(400).json({ error: "All fields are required" });
     }
 
     // Update venue in the database
-    const sql = `UPDATE caterer SET img1=?, img2=?, img3=?, img4=?, name=?, address=?, speciality=?, price=? WHERE id=?`;
-    con.query(sql, [img1, img2, img3, img4, name, address, speciality, price, venueId], (err, result) => {
+    const sql = `UPDATE caterer SET img1=?, img2=?, img3=?, img4=?, name=?, address=?, speciality=?, price=?, date=? WHERE id=?`;
+    con.query(sql, [img1, img2, img3, img4, name, address, speciality, price, date, venueId], (err, result) => {
         if (err) {
             console.log("Error updating venue:", err);
             return res.status(500).json({ error: "Internal Server Error" });

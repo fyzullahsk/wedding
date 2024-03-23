@@ -15,7 +15,8 @@ const AddVenue = () => {
         name: "",
         address: "",
         capacity: "",
-        price: ""
+        price: "",
+        date: "" // Add date property
     });
 
     const handleChange = (event) => {
@@ -37,7 +38,8 @@ const AddVenue = () => {
                 name: venueData.name,
                 address: venueData.address,
                 capacity: venueData.capacity,
-                price: venueData.price
+                price: venueData.price,
+                date: venueData.date // Include date in the request payload
             });
             console.log(response.data); // Handle successful response
             // Redirect or any other desired action
@@ -148,6 +150,16 @@ const AddVenue = () => {
                                     required
                                 />
                             </div>
+                            <div className="category-crud-input">
+                        <label>Date</label>
+                        <input
+                            type="date"
+                            name="date"
+                            value={venueData.date}
+                            onChange={handleChange}
+                            required
+                        />
+                    </div>
                         </div>
                     </div>
                     <div className="category-crud-buttons">

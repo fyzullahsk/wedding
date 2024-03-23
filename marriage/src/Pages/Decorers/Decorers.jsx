@@ -1,26 +1,38 @@
 import React, { useEffect, useState } from 'react';
 import './Decorers.css';
-import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import Navbar from "../../Components/Navbar/Navbar";
 
 function Decorers() {
   const [data, setData] = useState([]);
-  const navigate = useNavigate();
+  const [selectedDate, setSelectedDate] = useState('');
+  const [selectedLocation, setSelectedLocation] = useState('');
 
   useEffect(() => {
-    axios
-      .get('http://localhost:8081/getdecor')
-      .then(res => {
-        if (res.data.Status === 'Success') {
-          console.log(res.data.Result);
-          setData(res.data.Result);
-        } else {
-          alert('Error');
-        }
-      })
-      .catch(err => console.log(err));
-  }, []);
+    fetchData();
+  }, [selectedDate, selectedLocation]);
+
+  const fetchData = () => {
+    // Fetch data based on selected date and location if they exist
+    if (selectedDate && selectedLocation) {
+      axios.get(`http://localhost:8081/getdecordate?date=${selectedDate}&location=${selectedLocation}`)
+        .then(res => {
+          setData(res.data);
+        })
+        .catch(err => console.error('Error fetching decor data:', err));
+    } else {
+      // Fetch all data if no date and location are selected
+      axios.get('http://localhost:8081/getdecor')
+        .then(res => {
+          if (res.data.Status === 'Success') {
+            setData(res.data.Result);
+          } else {
+            alert('Error');
+          }
+        })
+        .catch(err => console.log(err));
+    }
+  };
 
   const handleAddToCart = (decorer) => {
     // Extract required data from the decorer object
@@ -42,12 +54,31 @@ function Decorers() {
       .catch(err => console.log(err));
   };
 
+  const handleDateChange = (event) => {
+    setSelectedDate(event.target.value);
+  };
+
+  const handleLocationChange = (event) => {
+    setSelectedLocation(event.target.value);
+  };
+
+  const handleFilter = () => {
+    fetchData();
+  };
+
   return (
     <>
       <Navbar/>
       <div className='body'>
         <div><br/></div>
         <div></div>
+      </div>
+      <div>
+        <p> Date Filter :- </p>
+        <input type="date" value={selectedDate} onChange={handleDateChange} />
+        <p> Location Filter :- </p>
+        <input type="text" value={selectedLocation} onChange={handleLocationChange} />
+        <button onClick={handleFilter}>Apply Filters</button>
       </div>
       <div className="templateContainer">
         {data.length > 0 ? (

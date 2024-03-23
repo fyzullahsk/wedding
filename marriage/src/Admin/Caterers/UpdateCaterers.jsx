@@ -16,7 +16,8 @@ const UpdateCaterer = () => {
         name: "",
         address: "",
         speciality: "",
-        price: ""
+        price: "",
+        date: "" // Add date property
     });
 
     // Fetch caterer data from the server based on the ID
@@ -24,14 +25,16 @@ const UpdateCaterer = () => {
         const fetchCatererData = async () => {
             try {
                 const response = await axios.get(`http://localhost:8081/getcaterer/${id}`);
-                const { img1, img2, img3, img4, name, address, speciality, price } = response.data;
-                setCatererData({ img1, img2, img3, img4, name, address, speciality, price });
+                const { img1, img2, img3, img4, name, address, speciality, price, date } = response.data.Result[0];
+                // Since response.data.Result is an array, you should access the first element to get the data
+                setCatererData({ img1, img2, img3, img4, name, address, speciality, price, date });
             } catch (error) {
                 console.error("Error fetching caterer data:", error);
             }
         };
         fetchCatererData();
     }, [id]);
+    
 
     const handleChange = (event) => {
         setCatererData({ ...catererData, [event.target.name]: event.target.value });
@@ -102,6 +105,16 @@ const UpdateCaterer = () => {
                                 name="price"
                                 placeholder="Enter caterer Price"
                                 value={catererData.price}
+                                onChange={handleChange}
+                                required
+                            />
+                        </div>
+                        <div className="category-crud-input">
+                            <label>Date</label>
+                            <input
+                                type="date"
+                                name="date"
+                                value={catererData.date}
                                 onChange={handleChange}
                                 required
                             />

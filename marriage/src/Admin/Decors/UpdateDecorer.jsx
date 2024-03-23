@@ -16,7 +16,8 @@ const UpdateDecorer = () => {
         name: "",
         address: "",
         theme: "",
-        price: ""
+        price: "",
+        date: "" // New state variable for date
     });
 
     // Fetch decorer data from the server based on the ID
@@ -24,8 +25,8 @@ const UpdateDecorer = () => {
         const fetchDecorerData = async () => {
             try {
                 const response = await axios.get(`http://localhost:8081/getdecor/${id}`);
-                const { img1, img2, img3, img4, name, address, theme, price } = response.data;
-                setDecorData({ img1, img2, img3, img4, name, address, theme, price });
+                const { img1, img2, img3, img4, name, address, theme, price, date } = response.data.Result[0];
+                setDecorData({ img1, img2, img3, img4, name, address, theme, price, date });
             } catch (error) {
                 console.error("Error fetching decorer data:", error);
             }
@@ -69,6 +70,17 @@ const UpdateDecorer = () => {
                                 name="name"
                                 placeholder="Enter decorer Name"
                                 value={decorData.name}
+                                onChange={handleChange}
+                                required
+                            />
+                        </div>
+                        {/* Add date input field */}
+                        <div className="category-crud-input">
+                            <label>Date</label>
+                            <input
+                                type="date"
+                                name="date"
+                                value={decorData.date}
                                 onChange={handleChange}
                                 required
                             />

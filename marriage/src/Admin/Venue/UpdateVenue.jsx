@@ -16,21 +16,23 @@ const UpdateVenue = () => {
         name: "",
         address: "",
         capacity: "",
-        price: ""
+        price: "",
+        date: "" // Add date field
     });
 
     // Fetch venue data from the server based on the ID
     useEffect(() => {
-        axios.get(`http://localhost:8081/getvenue/`+id)
-          .then(response => {
-            const { img1, img2, img3, img4, name, address, capacity, price } = response.data;
-            setVenueData({ img1, img2, img3, img4, name, address, capacity, price });
-          })
-          .catch(error => {
-            console.error("Error fetching venue data:", error);
-          });
+        const fetchVenueData = async () => {
+            try {
+                const response = await axios.get(`http://localhost:8081/getvenue/${id}`);
+                const { img1, img2, img3, img4, name, address, capacity, price, date } = response.data.Result[0];
+                setVenueData({ img1, img2, img3, img4, name, address, capacity, price, date });
+            } catch (error) {
+                console.error("Error fetching venue data:", error);
+            }
+        };
+        fetchVenueData();
     }, [id]);
-    
 
     const handleChange = (event) => {
         setVenueData({ ...venueData, [event.target.name]: event.target.value });
@@ -101,6 +103,16 @@ const UpdateVenue = () => {
                                 name="price"
                                 placeholder="Enter venue Price"
                                 value={venueData.price}
+                                onChange={handleChange}
+                                required
+                            />
+                        </div>
+                        <div className="category-crud-input">
+                            <label>Date</label>
+                            <input
+                                type="date"
+                                name="date"
+                                value={venueData.date}
                                 onChange={handleChange}
                                 required
                             />

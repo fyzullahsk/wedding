@@ -15,7 +15,8 @@ const AddCaterer = () => {
         name: "",
         address: "",
         speciality: "",
-        price: ""
+        price: "",
+        date: "" // Add date field to catererData state
     });
 
     const handleChange = (event) => {
@@ -37,7 +38,8 @@ const AddCaterer = () => {
                 name: catererData.name,
                 address: catererData.address,
                 speciality: catererData.speciality,
-                price: catererData.price
+                price: catererData.price,
+                date: catererData.date // Pass date field to the backend
             });
             console.log(response.data); // Handle successful response
             // Redirect or any other desired action
@@ -63,6 +65,17 @@ const AddCaterer = () => {
                                 name="name"
                                 placeholder="Enter caterer Name"
                                 value={catererData.name}
+                                onChange={handleChange}
+                                required
+                            />
+                        </div>
+                        {/* Include date input field */}
+                        <div className="category-crud-input">
+                            <label>Date</label>
+                            <input
+                                type="date"
+                                name="date"
+                                value={catererData.date}
                                 onChange={handleChange}
                                 required
                             />
