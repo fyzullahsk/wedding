@@ -7,7 +7,7 @@ export default function Navbar(){
         <>
         <nav className="navbar dashboard-nav">
                 <div className="navbar-container">
-                    <Link to="/" className="navbar-logo">
+                    <Link to="/dashboard" className="navbar-logo">
                         ForeverTie
                     </Link>
                     <ul className="nav-menu">
