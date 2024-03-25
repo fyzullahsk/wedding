@@ -12,7 +12,8 @@ export default function Registration() {
         email: '',
         phone: '',
         password: '',
-        confirmPassword: ''
+        confirmPassword: '',
+        userType: 'customer' // Default value for user type
     });
 
     const handleChange = (event) => {
@@ -25,6 +26,11 @@ export default function Registration() {
 
     const handleSubmit = async (event) => {
         event.preventDefault();
+        if (values.userType !== 'customer' && values.userType !== 'admin') {
+            // Display an error message or prevent form submission
+            console.error('Please select a user type (customer or admin)');
+            return;
+        }
         try {
             const response = await axios.post('http://localhost:8081/register', values);
             console.log(response.data); // Handle successful registration response
@@ -38,8 +44,8 @@ export default function Registration() {
 
     return (
         <>
-        {/* Nav bar common for register and login */}
-            <LandingNav/>
+            {/* Nav bar common for register and login */}
+            <LandingNav />
             <div className="heading">
                 <h1>Registration</h1>
             </div>
@@ -61,6 +67,19 @@ export default function Registration() {
                     <input type="tel" id="phone" name="phone" value={values.phone} onChange={handleChange} autoComplete="off" required />
                 </div>
                 <div className="item">
+                    <label>User Type</label>
+                    <div>
+                        <label>
+                            <input type="radio" name="userType" value="customer" checked={values.userType === 'customer'} onChange={handleChange} />
+                            Customer
+                        </label>
+                        <label>
+                            <input type="radio" name="userType" value="admin" checked={values.userType === 'admin'} onChange={handleChange} />
+                            Admin
+                        </label>
+                    </div>
+                </div>
+                <div className="item">
                     <label htmlFor="password">Password</label>
                     <input type="password" id="password" name="password" value={values.password} onChange={handleChange} autoComplete="off" required />
                 </div>
@@ -68,8 +87,8 @@ export default function Registration() {
                     <label htmlFor="confirmPassword">Confirm Password</label>
                     <input type="password" id="confirmPassword" name="confirmPassword" value={values.confirmPassword} onChange={handleChange} autoComplete="off" required />
                 </div>
-                    <input type="submit" value="Submit" id="submit" />
-                    <input type="button" value="Cancel" id="cancel" onClick={handleCancel} />
+                <input type="submit" value="Submit" id="login" />
+                <input type="button" value="Cancel" id="login" onClick={handleCancel} />
             </form>
         </>
     );

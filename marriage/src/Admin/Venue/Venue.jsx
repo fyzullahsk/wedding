@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import './venue.css';
-import { Link, useNavigate, Outlet } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom'; // Remove Outlet import
 import axios from 'axios';
 import { FaEdit, FaTrash } from 'react-icons/fa';
 import AdminNavbar from "../AdminNavbar/AdminNavbar";
@@ -36,6 +36,10 @@ function Venue() {
       .catch(err => console.log(err));
   };
 
+  const handleAddVenue = () => {
+    navigate("/AddVenue");
+  };
+
   return (
     <>
     <AdminNavbar/>
@@ -49,17 +53,17 @@ function Venue() {
             return (
               <div className="template" key={val.id} id="adminVenueGrid">
                 <div className="Container">
-                  <p>venue name  : {val.name}</p>
-                  <p>venue capacity : {val.capacity}</p>
                   <img src={val.img1} alt="" />
                   <img src={val.img2} alt="" />
                   <img src={val.img3} alt="" />
                   <img src={val.img4} alt="" />
-                  <p>venue address : {val.address} </p>
-                  <p>venue price : {val.price}</p>
+                  <p><b>Venue Name:  </b>   {val.name}</p>
+                  <p><b>Venue Capacity  </b>  {val.capacity}</p>
+                  <p><b>Address</b>  {val.address} </p>
+                  <p><b>Price :</b>  {val.price}</p>
                 </div>
                 <div className="buttonContainer">
-                  <Link to={`/admin/editvenue/${val.id}`} id="adminEditVenue" className="editButton" type="button">
+                  <Link to={`/UpdateVenue/${val.id}`} id="adminEditVenue" className="editButton" type="button">
                     <FaEdit />
                   </Link>
                   <Link onClick={e => handleDelete(val.id)} id="adminDelete" className="deleteButton" type="button">
@@ -73,6 +77,7 @@ function Venue() {
           <p>No results found.</p>
         )}
       </div>
+      <button onClick={handleAddVenue}  className="addButton">Add Venue</button>
     </>
   );
 }

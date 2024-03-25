@@ -8,15 +8,25 @@
     --white: #ffffff; /* Adjusted white color */
 }
 
-.login-main{
-    margin-top: 120px;
-}
-
 /* Common styles */
 * {
     margin: 0;
     box-sizing: border-box;
     font-family: 'Playfair Display', serif; /* Changed font to Playfair Display for a stylish look */
+}
+
+/* Heading */
+.heading {
+    height: 200px; /* Increased height for more impact */
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center; /* Center the background image */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: black; /* Changed text color to white for better contrast */
+    font-size: 25px; /* Increased font size for better readability */
+    text-align: center; /* Center-align text */
 }
 
 /* Form container */
@@ -64,9 +74,9 @@ input[type="button"] {
     justify-content: center;
     align-items: center;
     padding: 25px;
-    background-color: var(--white);
+    background: linear-gradient(45deg, var(--secondary-color), var(--primary-color)); /* Gradient background with mixed colors */
     margin: auto;
-    margin-top: 20px;
+    margin-top: 5%;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.1); /* Added box shadow for depth */
 }
 
@@ -74,17 +84,19 @@ input[type="button"] {
 .login-details > h3 {
     font-size: 24px; /* Increased font size for better readability */
     color: var(--secondary-color); /* Changed color to secondary color */
+
 }
 
 /* Login inputs */
 .login-inputs {
     width: 100%; /* Adjusted width for better spacing */
+    color: white;
 }
 
 /* Login header */
 .login-header {
     color: var(--white);
-    background-color: var(--primary-color); /* Changed background color to primary color */
+    background: linear-gradient(45deg, var(--primary-color), var(--secondary-color)); /* Gradient background with mixed colors */
     padding: 15px 25px; /* Increased padding for better spacing */
     border-radius: 20px;
 }
@@ -107,6 +119,7 @@ input[type="button"] {
     display: grid;
     gap: 1.5rem;
 }
+
 /* Button */
 #login {
     background-color: #ff69b4; /* Pink background color */

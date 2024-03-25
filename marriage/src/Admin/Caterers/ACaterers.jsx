@@ -1,17 +1,17 @@
 import React, { useEffect, useState } from 'react';
-import './Decors.css';
-import { Link, useNavigate, Outlet } from 'react-router-dom';
+import './Caterers.css';
+import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { FaEdit, FaTrash } from 'react-icons/fa';
 import AdminNavbar from "../AdminNavbar/AdminNavbar";
 
-function Decors() {
+function ACaterers() {
   const [data, setData] = useState([]);
   const navigate = useNavigate();
 
   useEffect(() => {
     axios
-      .get('http://localhost:8081/getdecor')
+      .get('http://localhost:8081/getcaterer')
       .then(res => {
         if (res.data.Status === 'Success') {
           console.log(res.data.Result);
@@ -25,7 +25,7 @@ function Decors() {
 
   const handleDelete = id => {
     axios
-      .delete(`http://localhost:8081/deletedecor/${id}`)
+      .delete(`http://localhost:8081/deletecaterer/${id}`)
       .then(res => {
         if (res.data.Status === 'Success') {
           window.location.reload(true);
@@ -35,8 +35,9 @@ function Decors() {
       })
       .catch(err => console.log(err));
   };
-  const handleAddDecorer = () => {
-    navigate("/AddDecorer");
+
+  const handleAddCaterer = () => {
+    navigate("/AddCaterers");
   };
 
   return (
@@ -50,19 +51,19 @@ function Decors() {
         {data.length > 0 ? (
           data.map((val) => {
             return (
-              <div className="template" key={val.id} id="adminDecorGrid">
+              <div className="template" key={val.id} id="adminCatererGrid">
                 <div className="Container">
                   <img src={val.img1} alt="" />
                   <img src={val.img2} alt="" />
                   <img src={val.img3} alt="" />
                   <img src={val.img4} alt="" />
-                  <p><b>Decor Name:  </b>   {val.name}</p>
-                  <p><b>Decor Theme  </b>  {val.theme}</p>
+                  <p><b>Caterer Name:  </b>   {val.name}</p>
+                  <p><b>Speciality </b>  {val.speciality}</p>
                   <p><b>Address</b>  {val.address} </p>
                   <p><b>Price :</b>  {val.price}</p>
                 </div>
                 <div className="buttonContainer">
-                  <Link to={`/UpdateDecorer/${val.id}`} id="adminEditDecor" className="editButton" type="button">
+                  <Link to={`/UpdateCaterer/${val.id}`} id="adminEditCaterer" className="editButton" type="button">
                     <FaEdit />
                   </Link>
                   <Link onClick={e => handleDelete(val.id)} id="adminDelete" className="deleteButton" type="button">
@@ -76,9 +77,9 @@ function Decors() {
           <p>No results found.</p>
         )}
       </div>
-      <button onClick={handleAddDecorer}  className="addButton">Add Decorer</button>
+      <button onClick={handleAddCaterer} className="addButton">Add Caterer</button>
     </>
   );
 }
 
-export default Decors;
+export default ACaterers;
