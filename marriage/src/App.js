@@ -22,6 +22,7 @@ import Caterers from "./Pages/Caterers/Caterers";
 import Bookings from "./Pages/Bookings/Bookings";
 import PaymentPage from "./Pages/Payments/Payments";
 import PaymentHistory from "./Pages/Payments/PaymentsHistory";
+import DemoApp  from "./Pages/FilterDate/FilterDate";
 function App() {
   return (
     <div className="App">
@@ -49,6 +50,9 @@ function App() {
           <Route path="/cart" element={<Bookings/>}/>
           <Route path="/payment" element={<PaymentPage/>}/>
           <Route path="/paymenthistory" element={<PaymentHistory/>}/>
+          <Route path="/demo" element={<DemoApp/>} />
+
+
         </Routes>
       </BrowserRouter>
     </div>
