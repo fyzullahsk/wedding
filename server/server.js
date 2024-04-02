@@ -15,7 +15,7 @@ app.use(bodyParser.json());
 const con = mysql.createConnection({
     host: "localhost",
     user: "root",
-    password: "", //Mysql@123
+    password: "admin@123", //Mysql@123
     database: "marriage",
 });
 
@@ -31,18 +31,18 @@ con.connect(function(err) {
 
 
 app.post('/login', (req, res) => {
-    const sql = 'SELECT * FROM users WHERE email=? AND password=?';
-    con.query(sql, [req.body.email, req.body.Password], (err, result) => {
+    const sql = 'SELECT * FROM users WHERE email=?';
+    con.query(sql, [req.body.email], (err, result) => {
         if (err) return res.json({ Status: "Error", Error: "Error in running query" });
         if (result.length > 0) {
             const userType = result[0].userType;
             if (userType === 'admin') {
                 return res.json({ Status: "admin" });
             } else if (userType === 'customer') {
-                return res.json({ Status: "customer", id: result[0].id }); // Assuming id is the field name for user ID
+                return res.json({ Status: "customer", id: result[0].id,password: result[0].password}); // Assuming id is the field name for user ID
             }
         } else {
-            return res.json({ Status: "Error", Error: "Wrong Email or Password" });
+            return res.json({ Status: "Error", message: "No User Found\nClick ok to Register" });
         }
     });
 });
@@ -435,23 +435,23 @@ app.delete('/removeitem/:userId/:itemId', (req, res) => {
 
 // POST route to store total amount
 app.post('/makepayment', (req, res) => {
-    const { userId, totalAmount } = req.body;
+    const { userId, totalAmount, paymentMode, paymentDate, paymentStatus } = req.body;
 
     // Validate request body
-    if (!userId || !totalAmount) {
-        return res.status(400).json({ error: "Both userId and totalAmount are required" });
+    if (!userId || !totalAmount || !paymentMode || !paymentDate || !paymentStatus) {
+        return res.status(400).json({ error: "All fields are required" });
     }
 
-    // Insert total amount into payments table
-    const insertQuery = "INSERT INTO payments (userId, totalAmount) VALUES (?, ?)";
-    con.query(insertQuery, [userId, totalAmount], (err, result) => {
+    // Insert payment details into payments table
+    const insertQuery = "INSERT INTO payments (userId, totalAmount, paymentMode, paymentDate, paymentStatus) VALUES (?, ?, ?, ?, ?)";
+    con.query(insertQuery, [userId, totalAmount, paymentMode, paymentDate, paymentStatus], (err, result) => {
         if (err) {
-            console.log("Error making payment:", err);
-            return res.status(500).json({ error: "Internal Server Error" });
+            console.error('Error making payment:', err);
+            return res.status(500).json({ error: "Payment failed. Please try again." });
+        } else {
+            console.log('Payment successful!');
+            res.status(200).json({ status: 'Success' });
         }
-
-        // Respond with success message
-        res.json({ status: "Success", message: "Payment successful" });
     });
 });
 
