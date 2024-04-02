@@ -17,7 +17,7 @@ function Bookings() {
         if (res.data.Status === 'Success') {
           setData(res.data.Result);
         } else {
-          alert('Error');
+          alert('Cart Is empty');
         }
       })
       .catch(err => console.log(err));
@@ -27,9 +27,7 @@ function Bookings() {
       .then(res => {
         if (res.data.Status === 'Success') {
           setTotalPrice(res.data.TotalPrice);
-        } else {
-          alert('Error');
-        }
+        } 
       })
       .catch(err => console.log(err));
   }, [userId]); // Fetch data again when userId changes
@@ -43,7 +41,7 @@ function Bookings() {
           fetchData();
         } else {
           window.location.reload(true);
-          alert('Deleted Successfully');
+          alert('item has been successfully');
         }
       })
       .catch(err => console.log(err));
