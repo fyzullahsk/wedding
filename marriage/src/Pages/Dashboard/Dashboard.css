@@ -13,10 +13,11 @@ input[type="date"] {
   grid-template-columns: repeat(3, 1fr) 150px;
   column-gap: 10px;
   margin-top: 0;
+  align-items: end;
 }
 
 .dashboard-outer-container {
-  margin-top: 2%;
+  margin-top: 6%;
 }
 
 .grid-item {
