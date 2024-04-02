@@ -111,7 +111,7 @@ export default function Dashboard() {
                                     </div>
                                 </div>
                             ))}
-                            <div className="grid-item small">
+                            <div className="grid-item">
                                 <button className="more-button" onClick={handleSeeCaterer}>
                                     <FontAwesomeIcon className="more-button-icon" icon={faChevronCircleDown} />See More
                                 </button>
