@@ -86,7 +86,7 @@ function Venues() {
                   <img src={val.img3} alt="" />
                   <img src={val.img4} alt="" />
                   <p><b>Venue Name:  </b>   {val.name}</p>
-                  <p><b>Capacity  :</b>  upto to {val.capacity} capacity </p>
+                  <p><b>Capacity  :</b>  upto to {val.capacity} </p>
                   <p><b>Address</b>  {val.address} </p>
                   <p><b>Price per hour : $</b>  {val.price}</p>
                   <button onClick={() => handleAddToCart(val)}  className="addButton">Add to Cart</button>
