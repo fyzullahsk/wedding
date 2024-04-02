@@ -13,7 +13,7 @@ export default function Registration() {
         phone: '',
         password: '',
         confirmPassword: '',
-        userType: 'customer' // Default value for user type
+        userType: 'customer'
     });
 
     const handleChange = (event) => {
@@ -26,19 +26,29 @@ export default function Registration() {
 
     const handleSubmit = async (event) => {
         event.preventDefault();
-        if (values.userType !== 'customer' && values.userType !== 'admin') {
+        var regex = /[a-zA-Z]/;
+        // message;
+        console.log(values);
+        if (values.confirmPassword !=values.password) {
             // Display an error message or prevent form submission
-            console.error('Please select a user type (customer or admin)');
-            return;
+            // message+='Passwords do not match\n';
+            alert('Passwords do not match');
         }
-        try {
-            const response = await axios.post('http://localhost:8081/register', values);
-            console.log(response.data); // Handle successful registration response
-            // Redirect to login page or any other desired action
-            navigate('/login');
-        } catch (error) {
-            console.error('Registration error:', error.response.data);
-            // Handle error, display error messages, etc.
+        if(regex.test(values.phone)){
+            alert(' invalid Phone Number');
+        }
+        else{
+
+            try {
+                const response = await axios.post('http://localhost:8081/register', values);
+                // console.log(response.data); // Handle successful registration response
+                alert(response.data.message)
+                // Redirect to login page or any other desired action
+                navigate('/login');
+            } catch (error) {
+                console.error('Registration error:', error.response.data);
+                // Handle error, display error messages, etc.
+            }
         }
     };
 
@@ -66,7 +76,7 @@ export default function Registration() {
                     <label htmlFor="phone">Phone Number</label>
                     <input type="tel" id="phone" name="phone" value={values.phone} onChange={handleChange} autoComplete="off" required />
                 </div>
-                <div className="item">
+                {/* <div className="item">
                     <label>User Type</label>
                     <div>
                         <label>
@@ -78,7 +88,7 @@ export default function Registration() {
                             Admin
                         </label>
                     </div>
-                </div>
+                </div> */}
                 <div className="item">
                     <label htmlFor="password">Password</label>
                     <input type="password" id="password" name="password" value={values.password} onChange={handleChange} autoComplete="off" required />
